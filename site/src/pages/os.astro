@@ -19,6 +19,7 @@ import {
     <title>SCV/OS — Sean Denton | Sometimes Creek Ventures</title>
     <meta name="description" content={site.description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script src="/os.js" defer is:inline></script>
   </head>
   <body>
     <div class="desktop">
@@ -29,8 +30,12 @@ import {
         <div class="icon">🗑️<span>meetings.tmp</span></div>
       </div>
 
-      <section class="win main" data-drag style="--x: 2rem; --y: 1.5rem;">
-        <div class="tbar"><span>SEAN.EXE — running since 1999</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+      <section class="win main active" data-drag data-title="SEAN.EXE" style="--x: 2%; --y: 2rem;">
+        <div class="tbar">
+          <span>SEAN.EXE — running since 1999</span>
+          <span class="btns"><button class="wbtn" type="button" aria-label="Close SEAN.EXE" data-close>×</button></span>
+        </div>
+        <div class="menu" aria-hidden="true"><span>File</span><span>Edit</span><span>Ship</span><span>Help</span></div>
         <div class="pad">
           <h1>I BUILD THINGS<br />THAT SHIP.</h1>
           <p>
@@ -39,11 +44,16 @@ import {
             hospitals, tractors. It's just me. That's the point.
           </p>
           <a class="btn" href={`mailto:${contact.email}`}>📧 {contact.email}</a>
+          <p class="hint" aria-hidden="true">tip: these windows drag. the × works. it's a real desktop.</p>
         </div>
       </section>
 
-      <section class="win list" data-drag style="--x: 6rem; --y: 24rem;">
-        <div class="tbar"><span>📁 THE_LIST — 16 objects</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+      <section class="win list" data-drag data-title="THE_LIST" style="--x: 3%; --y: 27rem;">
+        <div class="tbar">
+          <span>📁 THE_LIST — 16 objects</span>
+          <span class="btns"><button class="wbtn" type="button" aria-label="Close THE_LIST" data-close>×</button></span>
+        </div>
+        <div class="menu" aria-hidden="true"><span>File</span><span>View</span><span>Sort: CRAZIEST FIRST</span></div>
         <div class="pad scroll">
           {
             stories.map((item) => (
@@ -56,19 +66,24 @@ import {
         </div>
       </section>
 
-      <section class="win method" data-drag style="--x: 46rem; --y: 20rem;">
-        <div class="tbar"><span>⚙ METHOD.BAT</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+      <section class="win method" data-drag data-title="METHOD.BAT" style="--x: 40%; --y: 30rem;">
+        <div class="tbar">
+          <span>⚙ METHOD.BAT</span>
+          <span class="btns"><button class="wbtn" type="button" aria-label="Close METHOD.BAT" data-close>×</button></span>
+        </div>
         <div class="pad mono">
           <p>C:\SCV&gt; run method</p>
           {method.loop.map((step, i) => <p>[{i + 1}/5] {step.toUpperCase()} ... OK</p>)}
-          <p class="rem">REM {method.lines[0]}</p>
-          <p class="rem">REM {method.lines[1]}</p>
-          <p class="rem">REM {method.lines[2]}</p>
+          {method.lines.map((line) => <p class="rem">REM {line}</p>)}
         </div>
       </section>
 
-      <section class="win sys" data-drag style="--x: 44rem; --y: 1.5rem;">
-        <div class="tbar"><span>🖥 SYSTEM PROPERTIES — STACK</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+      <section class="win sys" data-drag data-title="STACK" style="--x: 55%; --y: 2rem;">
+        <div class="tbar">
+          <span>🖥 SYSTEM PROPERTIES — STACK</span>
+          <span class="btns"><button class="wbtn" type="button" aria-label="Close Stack" data-close>×</button></span>
+        </div>
+        <div class="menu" aria-hidden="true"><span>General</span><span>Device Manager</span><span>Performance: EXCESSIVE</span></div>
         <div class="pad small">
           {
             stack.map((group) => (
@@ -80,8 +95,11 @@ import {
         </div>
       </section>
 
-      <section class="win nowwin" data-drag style="--x: 30rem; --y: 44rem;">
-        <div class="tbar"><span>📈 NOW.LOG — tail -f</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+      <section class="win nowwin" data-drag data-title="NOW.LOG" style="--x: 36%; --y: 50rem;">
+        <div class="tbar">
+          <span>📈 NOW.LOG — tail -f</span>
+          <span class="btns"><button class="wbtn" type="button" aria-label="Close NOW.LOG" data-close>×</button></span>
+        </div>
         <div class="pad small">
           {
             now.map((item) => (
@@ -99,8 +117,11 @@ import {
         </div>
       </section>
 
-      <section class="win about" data-drag style="--x: 62rem; --y: 40rem;">
-        <div class="tbar"><span>ℹ ABOUT_SEAN.TXT</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+      <section class="win about" data-drag data-title="ABOUT_SEAN" style="--x: 66%; --y: 42rem;">
+        <div class="tbar">
+          <span>ℹ ABOUT_SEAN.TXT</span>
+          <span class="btns"><button class="wbtn" type="button" aria-label="Close About" data-close>×</button></span>
+        </div>
         <div class="pad small">
           <p>
             Petroleum engineer by degree (UT Austin), twenty-plus years
@@ -115,13 +136,13 @@ import {
         </div>
       </section>
 
-      <div class="note" data-drag style="--x: 74rem; --y: 4rem;">
+      <div class="note" data-drag data-title="TODO.txt" style="--x: 80%; --y: 6rem;">
         <b>TODO.txt</b><br />☑ ship it<br />☑ ship it again<br />☐ your project →<br />
         <a href={`mailto:${contact.email}`}>email SEAN.EXE</a>
       </div>
 
-      <div class="win dialog" data-drag style="--x: 26rem; --y: 15rem;">
-        <div class="tbar err"><span>⚠ SCOPE_CREEP.DLL</span><span class="btns" aria-hidden="true">×</span></div>
+      <div class="win dialog" data-drag data-title="SCOPE_CREEP.DLL" style="--x: 30%; --y: 14rem;">
+        <div class="tbar err"><span>⚠ SCOPE_CREEP.DLL</span></div>
         <div class="pad small center">
           <p>Committee meeting has stopped responding.</p>
           <div class="row">
@@ -134,60 +155,23 @@ import {
 
     <div class="taskbar">
       <span class="start">◈ START</span>
-      <span class="task">SEAN.EXE</span>
-      <span class="task">ship_it.sh</span>
-      <span class="clock">GEORGETOWN, TX — 5:00 PM FOREVER</span>
+      <span class="tasks" data-tasks></span>
+      <span class="clock" data-clock>GEORGETOWN, TX</span>
     </div>
     <VariantSwitcher current="os" raised />
-
-    <script>
-      // Draggable windows on pointer-capable desktops; taps to raise on all.
-      let z = 10;
-      const fine = window.matchMedia('(pointer: fine) and (min-width: 900px)').matches;
-      document.querySelectorAll<HTMLElement>('[data-drag]').forEach((win) => {
-        const bar = win.querySelector<HTMLElement>('.tbar') ?? win;
-        win.addEventListener('pointerdown', () => {
-          win.style.zIndex = String(++z);
-        });
-        if (!fine) return;
-        bar.style.cursor = 'grab';
-        bar.addEventListener('pointerdown', (e) => {
-          const target = e.target as HTMLElement;
-          if (target.closest('a, button')) return;
-          const rect = win.getBoundingClientRect();
-          const parent = win.offsetParent!.getBoundingClientRect();
-          const dx = e.clientX - rect.left;
-          const dy = e.clientY - rect.top;
-          const move = (ev: PointerEvent) => {
-            win.style.setProperty('--x', `${ev.clientX - parent.left - dx}px`);
-            win.style.setProperty('--y', `${ev.clientY - parent.top - dy}px`);
-          };
-          const up = () => {
-            document.removeEventListener('pointermove', move);
-            document.removeEventListener('pointerup', up);
-          };
-          document.addEventListener('pointermove', move);
-          document.addEventListener('pointerup', up);
-          e.preventDefault();
-        });
-      });
-      document.querySelectorAll('[data-endtask]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          (btn.closest('.dialog') as HTMLElement).style.display = 'none';
-        });
-      });
-    </script>
   </body>
 </html>
 
 <style>
   * { margin: 0; box-sizing: border-box; }
   body {
-    background: repeating-conic-gradient(#0e8f8f 0% 25%, #0a7d7d 0% 50%) 0 0 / 28px 28px;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255,255,255,0.08), transparent 45%),
+      repeating-conic-gradient(#0e8f8f 0% 25%, #0a7d7d 0% 50%) 0 0 / 28px 28px;
     font-family: Tahoma, 'MS Sans Serif', system-ui, sans-serif;
     color: #111; min-height: 100vh; padding-bottom: 2.6rem;
   }
-  .desktop { position: relative; max-width: 100rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; min-height: 72rem; }
+  .desktop { position: relative; max-width: 100rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
   .icons { position: absolute; top: 1.5rem; right: 1.5rem; display: grid; gap: 1.25rem; justify-items: center; z-index: 1; }
   .icon { display: grid; justify-items: center; gap: 0.25rem; font-size: 1.8rem; }
   .icon span { font-size: 0.68rem; color: #fff; background: #0a6262; padding: 0 0.3rem; }
@@ -195,27 +179,38 @@ import {
     background: #d9d6cf; border: 2px solid; border-color: #fff #55524b #55524b #fff;
     box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
   }
-  @media (pointer: fine) and (min-width: 900px) {
+  .win.active { box-shadow: 6px 6px 0 rgba(0,0,0,0.45); }
+  @media (min-width: 900px) {
     .win, .note { position: absolute; left: var(--x); top: var(--y); }
-    .desktop { min-height: 66rem; }
+    .desktop { min-height: 74rem; }
   }
-  @media not ((pointer: fine) and (min-width: 900px)) {
+  @media (max-width: 899.9px) {
     .win, .note { margin-bottom: 1.5rem; max-width: 44rem; }
+    .icons { display: none; }
   }
-  .main { width: min(40rem, 92%); z-index: 3; }
-  .list { width: min(36rem, 92%); }
+  .main { width: min(42rem, 92%); z-index: 3; }
+  .list { width: min(34rem, 92%); }
   .method { width: min(30rem, 92%); }
-  .sys { width: min(30rem, 92%); }
-  .nowwin { width: min(32rem, 92%); }
+  .sys { width: min(34rem, 92%); }
+  .nowwin { width: min(30rem, 92%); }
   .about { width: min(26rem, 92%); }
   .dialog { width: min(22rem, 92%); z-index: 5; }
   .tbar {
     display: flex; justify-content: space-between; align-items: center; user-select: none;
-    background: linear-gradient(90deg, #0a246a, #3a6ea5); color: #fff;
+    background: linear-gradient(90deg, #6b6b70, #9a9aa0); color: #eee;
     padding: 0.3rem 0.6rem; font-size: 0.78rem; font-weight: 700;
+    touch-action: none;
   }
-  .tbar.err { background: linear-gradient(90deg, #7a0d0d, #c22525); }
-  .btns { letter-spacing: 0.3em; }
+  @media (min-width: 900px) { .tbar { cursor: grab; } .tbar.grabbing { cursor: grabbing; } }
+  .win.active > .tbar { background: linear-gradient(90deg, #0a246a, #3a6ea5); color: #fff; }
+  .tbar.err { background: linear-gradient(90deg, #7a0d0d, #c22525) !important; color: #fff; }
+  .wbtn {
+    font-family: inherit; font-size: 0.72rem; font-weight: 700; line-height: 1;
+    background: #d9d6cf; color: #111; border: 2px solid; border-color: #fff #55524b #55524b #fff;
+    width: 1.35rem; height: 1.25rem; cursor: pointer;
+  }
+  .wbtn:active { border-color: #55524b #fff #fff #55524b; }
+  .menu { display: flex; gap: 1rem; background: #e8e5de; border-bottom: 1px solid #b5b2aa; padding: 0.25rem 0.7rem; font-size: 0.72rem; color: #333; }
   .pad { padding: 1.3rem; }
   .pad.small { font-size: 0.82rem; line-height: 1.55; }
   .pad.mono { font-family: ui-monospace, monospace; font-size: 0.78rem; line-height: 1.7; background: #111; color: #6fe08a; }
@@ -224,6 +219,7 @@ import {
   h1 { font-size: clamp(2rem, 5.5vw, 3.6rem); line-height: 0.95; letter-spacing: -0.02em; }
   .pad p { margin-top: 0.7rem; line-height: 1.5; }
   .pad.mono p { margin: 0; }
+  .hint { font-size: 0.72rem; color: #6b6760; font-style: italic; }
   .btn {
     display: inline-block; margin-top: 1rem; background: #d9d6cf; color: #111;
     border: 2px solid; border-color: #fff #55524b #55524b #fff; padding: 0.45rem 0.9rem;
@@ -231,7 +227,7 @@ import {
   }
   .btn:active { border-color: #55524b #fff #fff #55524b; }
   .row { display: flex; gap: 1rem; justify-content: center; margin-top: 0.5rem; }
-  .scroll { max-height: 21rem; overflow-y: auto; }
+  .scroll { max-height: 20rem; overflow-y: auto; }
   .file-row { font-size: 0.8rem; line-height: 1.5; margin-bottom: 0.7rem; }
   .file-row b { display: block; }
   .file-row span { color: #444; }
@@ -247,11 +243,17 @@ import {
   }
   .note a { color: #0a246a; font-weight: 700; }
   .taskbar {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; gap: 0.6rem; align-items: center;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 200; display: flex; gap: 0.6rem; align-items: center;
     background: #d9d6cf; border-top: 2px solid #fff; padding: 0.35rem 0.6rem; font-size: 0.78rem; font-weight: 700;
+    overflow-x: auto;
   }
-  .start { background: #0a8f2f; color: #fff; padding: 0.25rem 0.7rem; border: 2px solid; border-color: #b5f0c4 #04581b #04581b #b5f0c4; }
-  .task { background: #c5c2ba; padding: 0.25rem 0.7rem; border: 2px solid; border-color: #55524b #fff #fff #55524b; }
-  .clock { margin-left: auto; background: #c5c2ba; padding: 0.25rem 0.7rem; border: 1px solid #8a877f; }
+  .start { background: #0a8f2f; color: #fff; padding: 0.25rem 0.7rem; border: 2px solid; border-color: #b5f0c4 #04581b #04581b #b5f0c4; white-space: nowrap; }
+  .tasks { display: flex; gap: 0.5rem; }
+  :global(.task) {
+    background: #c5c2ba; padding: 0.25rem 0.7rem; border: 2px solid; border-color: #55524b #fff #fff #55524b;
+    font: inherit; cursor: pointer; white-space: nowrap;
+  }
+  :global(.task.min) { border-color: #fff #55524b #55524b #fff; background: #d9d6cf; font-style: italic; }
+  .clock { margin-left: auto; background: #c5c2ba; padding: 0.25rem 0.7rem; border: 1px solid #8a877f; white-space: nowrap; }
   a:focus-visible, button:focus-visible { outline: 3px solid #0a246a; outline-offset: 2px; }
 </style>
