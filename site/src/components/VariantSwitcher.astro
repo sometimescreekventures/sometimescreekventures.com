@@ -1,0 +1,78 @@
+---
+/** Fixed bottom switcher for flipping between the live design variants. */
+interface Props {
+  current: 'paper' | 'flood' | 'os' | 'arcade';
+  /** Extra bottom offset (e.g. above the OS taskbar). */
+  raised?: boolean;
+}
+
+const { current, raised = false } = Astro.props;
+
+const variants = [
+  { id: 'paper', label: 'PAPER', href: '/' },
+  { id: 'flood', label: 'FLOOD', href: '/flood' },
+  { id: 'os', label: 'OS', href: '/os' },
+  { id: 'arcade', label: 'ARCADE', href: '/arcade' },
+] as const;
+---
+
+<nav class:list={['switcher', { raised }]} aria-label="Design variants">
+  <span class="sw-label">STYLE</span>
+  {
+    variants.map((v) => (
+      <a
+        href={v.href}
+        aria-current={v.id === current ? 'page' : undefined}
+        class:list={['sw-link', { on: v.id === current }]}
+      >
+        {v.label}
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .switcher {
+    position: fixed;
+    bottom: 0.9rem;
+    right: 0.9rem;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    background: rgba(14, 14, 16, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    padding: 0.3rem 0.55rem;
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  }
+
+  .switcher.raised {
+    bottom: 3.2rem;
+  }
+
+  .sw-label {
+    color: #8b8b93;
+    margin-right: 0.3rem;
+  }
+
+  .sw-link {
+    color: #d8d8de;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+
+  .sw-link:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .sw-link.on {
+    background: #ff4400;
+    color: #fff;
+  }
+</style>

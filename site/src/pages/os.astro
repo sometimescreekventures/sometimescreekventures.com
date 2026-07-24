@@ -1,0 +1,257 @@
+---
+import VariantSwitcher from '../components/VariantSwitcher.astro';
+import {
+  clients,
+  contact,
+  method,
+  now,
+  site,
+  stack,
+  stories,
+} from '../data/site';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>SCV/OS — Sean Denton | Sometimes Creek Ventures</title>
+    <meta name="description" content={site.description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="desktop">
+      <div class="icons" aria-hidden="true">
+        <div class="icon">🚀<span>rocket_data.log</span></div>
+        <div class="icon">❤️<span>human_hearts.db</span></div>
+        <div class="icon">🚜<span>tractor_ble.sys</span></div>
+        <div class="icon">🗑️<span>meetings.tmp</span></div>
+      </div>
+
+      <section class="win main" data-drag style="--x: 2rem; --y: 1.5rem;">
+        <div class="tbar"><span>SEAN.EXE — running since 1999</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+        <div class="pad">
+          <h1>I BUILD THINGS<br />THAT SHIP.</h1>
+          <p>
+            Sean Denton — the whole engineering department in one process.
+            Systems from nothing to production: rockets, drive-thrus,
+            hospitals, tractors. It's just me. That's the point.
+          </p>
+          <a class="btn" href={`mailto:${contact.email}`}>📧 {contact.email}</a>
+        </div>
+      </section>
+
+      <section class="win list" data-drag style="--x: 6rem; --y: 24rem;">
+        <div class="tbar"><span>📁 THE_LIST — 16 objects</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+        <div class="pad scroll">
+          {
+            stories.map((item) => (
+              <p class="file-row">
+                <b>📄 {item.hook.toLowerCase().replace(/[^a-z0-9]+/g, '_')}.txt</b>
+                <span>{item.story}</span>
+              </p>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="win method" data-drag style="--x: 46rem; --y: 20rem;">
+        <div class="tbar"><span>⚙ METHOD.BAT</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+        <div class="pad mono">
+          <p>C:\SCV&gt; run method</p>
+          {method.loop.map((step, i) => <p>[{i + 1}/5] {step.toUpperCase()} ... OK</p>)}
+          <p class="rem">REM {method.lines[0]}</p>
+          <p class="rem">REM {method.lines[1]}</p>
+          <p class="rem">REM {method.lines[2]}</p>
+        </div>
+      </section>
+
+      <section class="win sys" data-drag style="--x: 44rem; --y: 1.5rem;">
+        <div class="tbar"><span>🖥 SYSTEM PROPERTIES — STACK</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+        <div class="pad small">
+          {
+            stack.map((group) => (
+              <p class="sysrow">
+                <b>{group.label}:</b> {group.items.join(', ')}
+              </p>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="win nowwin" data-drag style="--x: 30rem; --y: 44rem;">
+        <div class="tbar"><span>📈 NOW.LOG — tail -f</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+        <div class="pad small">
+          {
+            now.map((item) => (
+              <p class="logline">
+                <span class="ok">RUN</span> {item.what}
+                {'links' in item &&
+                  item.links?.map((link) => (
+                    <a class="loglink" href={link.href}>
+                      [{link.label}]
+                    </a>
+                  ))}
+              </p>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="win about" data-drag style="--x: 62rem; --y: 40rem;">
+        <div class="tbar"><span>ℹ ABOUT_SEAN.TXT</span><span class="btns" aria-hidden="true">— □ ×</span></div>
+        <div class="pad small">
+          <p>
+            Petroleum engineer by degree (UT Austin), twenty-plus years
+            shipping software instead. CTO, principal architect, tech lead,
+            and the contractor who parachutes in when it's on fire. Patent
+            US 8,887,290 B1. Georgetown, TX.
+          </p>
+          <p class="clients">Known associates: {clients.join(' · ')}</p>
+          <p class="links">
+            <a href={contact.linkedin}>LinkedIn</a> · <a href={contact.github}>GitHub</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="note" data-drag style="--x: 74rem; --y: 4rem;">
+        <b>TODO.txt</b><br />☑ ship it<br />☑ ship it again<br />☐ your project →<br />
+        <a href={`mailto:${contact.email}`}>email SEAN.EXE</a>
+      </div>
+
+      <div class="win dialog" data-drag style="--x: 26rem; --y: 15rem;">
+        <div class="tbar err"><span>⚠ SCOPE_CREEP.DLL</span><span class="btns" aria-hidden="true">×</span></div>
+        <div class="pad small center">
+          <p>Committee meeting has stopped responding.</p>
+          <div class="row">
+            <button class="btn" type="button" data-endtask>End Task</button>
+            <button class="btn" type="button" data-endtask>End Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="taskbar">
+      <span class="start">◈ START</span>
+      <span class="task">SEAN.EXE</span>
+      <span class="task">ship_it.sh</span>
+      <span class="clock">GEORGETOWN, TX — 5:00 PM FOREVER</span>
+    </div>
+    <VariantSwitcher current="os" raised />
+
+    <script>
+      // Draggable windows on pointer-capable desktops; taps to raise on all.
+      let z = 10;
+      const fine = window.matchMedia('(pointer: fine) and (min-width: 900px)').matches;
+      document.querySelectorAll<HTMLElement>('[data-drag]').forEach((win) => {
+        const bar = win.querySelector<HTMLElement>('.tbar') ?? win;
+        win.addEventListener('pointerdown', () => {
+          win.style.zIndex = String(++z);
+        });
+        if (!fine) return;
+        bar.style.cursor = 'grab';
+        bar.addEventListener('pointerdown', (e) => {
+          const target = e.target as HTMLElement;
+          if (target.closest('a, button')) return;
+          const rect = win.getBoundingClientRect();
+          const parent = win.offsetParent!.getBoundingClientRect();
+          const dx = e.clientX - rect.left;
+          const dy = e.clientY - rect.top;
+          const move = (ev: PointerEvent) => {
+            win.style.setProperty('--x', `${ev.clientX - parent.left - dx}px`);
+            win.style.setProperty('--y', `${ev.clientY - parent.top - dy}px`);
+          };
+          const up = () => {
+            document.removeEventListener('pointermove', move);
+            document.removeEventListener('pointerup', up);
+          };
+          document.addEventListener('pointermove', move);
+          document.addEventListener('pointerup', up);
+          e.preventDefault();
+        });
+      });
+      document.querySelectorAll('[data-endtask]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          (btn.closest('.dialog') as HTMLElement).style.display = 'none';
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    background: repeating-conic-gradient(#0e8f8f 0% 25%, #0a7d7d 0% 50%) 0 0 / 28px 28px;
+    font-family: Tahoma, 'MS Sans Serif', system-ui, sans-serif;
+    color: #111; min-height: 100vh; padding-bottom: 2.6rem;
+  }
+  .desktop { position: relative; max-width: 100rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; min-height: 72rem; }
+  .icons { position: absolute; top: 1.5rem; right: 1.5rem; display: grid; gap: 1.25rem; justify-items: center; z-index: 1; }
+  .icon { display: grid; justify-items: center; gap: 0.25rem; font-size: 1.8rem; }
+  .icon span { font-size: 0.68rem; color: #fff; background: #0a6262; padding: 0 0.3rem; }
+  .win, .note {
+    background: #d9d6cf; border: 2px solid; border-color: #fff #55524b #55524b #fff;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+  }
+  @media (pointer: fine) and (min-width: 900px) {
+    .win, .note { position: absolute; left: var(--x); top: var(--y); }
+    .desktop { min-height: 66rem; }
+  }
+  @media not ((pointer: fine) and (min-width: 900px)) {
+    .win, .note { margin-bottom: 1.5rem; max-width: 44rem; }
+  }
+  .main { width: min(40rem, 92%); z-index: 3; }
+  .list { width: min(36rem, 92%); }
+  .method { width: min(30rem, 92%); }
+  .sys { width: min(30rem, 92%); }
+  .nowwin { width: min(32rem, 92%); }
+  .about { width: min(26rem, 92%); }
+  .dialog { width: min(22rem, 92%); z-index: 5; }
+  .tbar {
+    display: flex; justify-content: space-between; align-items: center; user-select: none;
+    background: linear-gradient(90deg, #0a246a, #3a6ea5); color: #fff;
+    padding: 0.3rem 0.6rem; font-size: 0.78rem; font-weight: 700;
+  }
+  .tbar.err { background: linear-gradient(90deg, #7a0d0d, #c22525); }
+  .btns { letter-spacing: 0.3em; }
+  .pad { padding: 1.3rem; }
+  .pad.small { font-size: 0.82rem; line-height: 1.55; }
+  .pad.mono { font-family: ui-monospace, monospace; font-size: 0.78rem; line-height: 1.7; background: #111; color: #6fe08a; }
+  .rem { color: #3d9e53; }
+  .center { text-align: center; }
+  h1 { font-size: clamp(2rem, 5.5vw, 3.6rem); line-height: 0.95; letter-spacing: -0.02em; }
+  .pad p { margin-top: 0.7rem; line-height: 1.5; }
+  .pad.mono p { margin: 0; }
+  .btn {
+    display: inline-block; margin-top: 1rem; background: #d9d6cf; color: #111;
+    border: 2px solid; border-color: #fff #55524b #55524b #fff; padding: 0.45rem 0.9rem;
+    font-weight: 700; text-decoration: none; font-size: 0.85rem; font-family: inherit; cursor: pointer;
+  }
+  .btn:active { border-color: #55524b #fff #fff #55524b; }
+  .row { display: flex; gap: 1rem; justify-content: center; margin-top: 0.5rem; }
+  .scroll { max-height: 21rem; overflow-y: auto; }
+  .file-row { font-size: 0.8rem; line-height: 1.5; margin-bottom: 0.7rem; }
+  .file-row b { display: block; }
+  .file-row span { color: #444; }
+  .sysrow { font-size: 0.8rem; margin-top: 0.5rem !important; }
+  .logline { font-size: 0.8rem; }
+  .ok { background: #0a8f2f; color: #fff; font-weight: 700; font-size: 0.68rem; padding: 0.05rem 0.35rem; margin-right: 0.4rem; }
+  .loglink { margin-left: 0.4rem; color: #0a246a; font-weight: 700; }
+  .clients { color: #444; font-size: 0.75rem; }
+  .links a { color: #0a246a; font-weight: 700; }
+  .note {
+    width: 12rem; background: #fff79b; padding: 1rem; font-size: 0.8rem; line-height: 1.7;
+    transform: rotate(3deg); font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
+  .note a { color: #0a246a; font-weight: 700; }
+  .taskbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; gap: 0.6rem; align-items: center;
+    background: #d9d6cf; border-top: 2px solid #fff; padding: 0.35rem 0.6rem; font-size: 0.78rem; font-weight: 700;
+  }
+  .start { background: #0a8f2f; color: #fff; padding: 0.25rem 0.7rem; border: 2px solid; border-color: #b5f0c4 #04581b #04581b #b5f0c4; }
+  .task { background: #c5c2ba; padding: 0.25rem 0.7rem; border: 2px solid; border-color: #55524b #fff #fff #55524b; }
+  .clock { margin-left: auto; background: #c5c2ba; padding: 0.25rem 0.7rem; border: 1px solid #8a877f; }
+  a:focus-visible, button:focus-visible { outline: 3px solid #0a246a; outline-offset: 2px; }
+</style>

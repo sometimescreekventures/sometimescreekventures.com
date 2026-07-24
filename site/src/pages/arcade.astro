@@ -1,0 +1,198 @@
+---
+import VariantSwitcher from '../components/VariantSwitcher.astro';
+import {
+  clients,
+  contact,
+  method,
+  now,
+  site,
+  stack,
+  stories,
+} from '../data/site';
+
+const skills = [
+  { name: 'BACKEND', level: 96 },
+  { name: 'INFRA', level: 94 },
+  { name: 'FRONTEND', level: 88 },
+  { name: 'LEADERSHIP', level: 92 },
+  { name: 'AI AGENTS', level: 95 },
+  { name: 'SHIPPING', level: 99 },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Arcade — Sean Denton | Sometimes Creek Ventures</title>
+    <meta name="description" content={site.description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main class="cab">
+      <p class="marq">★ CHOOSE YOUR ENGINEER ★</p>
+      <div class="screen">
+        <div class="char">
+          <p class="p1">P1 — READY</p>
+          <div class="sprite" aria-hidden="true">
+            <div class="px hat"></div>
+            <div class="px face"></div>
+            <div class="px body"></div>
+          </div>
+          <h1>SEAN<br />DENTON</h1>
+          <p class="class">CLASS: FULL-STACK · LV. 20+</p>
+          <div class="stats">
+            {
+              skills.map((s) => (
+                <div class="stat">
+                  <span class="sname">{s.name}</span>
+                  <span class="bar">
+                    <span class="fill" style={`width:${s.level}%`} />
+                  </span>
+                  <span class="lvl">{s.level}</span>
+                </div>
+              ))
+            }
+          </div>
+          <p class="special">
+            SPECIAL MOVE: "IT'S JUST ME." — SOLO-CARRIES ENTIRE CAMPAIGN
+          </p>
+          <div class="combo">
+            <p class="combo-title">◆ COMBO MOVE ◆</p>
+            <p class="combo-seq">
+              {method.loop.map((step, i) => (
+                <>
+                  <span class="key">{step.toUpperCase()}</span>
+                  {i < method.loop.length - 1 && <span class="plus" aria-hidden="true">+</span>}
+                </>
+              ))}
+            </p>
+            <ul class="combo-notes">
+              {method.lines.map((line) => <li>{line}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <div class="right">
+          <p class="qtitle">◆ QUEST LOG — COMPLETED ◆</p>
+          {
+            stories.map((item) => (
+              <div class="quest">
+                <p class="qname">▸ {item.hook.toUpperCase()} <span class="done">[CLEAR]</span></p>
+                <p class="qbody">{item.story}</p>
+              </div>
+            ))
+          }
+
+          <p class="qtitle spaced">◆ ACTIVE QUESTS ◆</p>
+          {
+            now.map((item) => (
+              <div class="quest">
+                <p class="qname">
+                  ▸ {item.what.toUpperCase()} <span class="live">[IN PROGRESS]</span>
+                  {'links' in item &&
+                    item.links?.map((link) => (
+                      <a class="qlink" href={link.href}>
+                        [{link.label.toUpperCase()}]
+                      </a>
+                    ))}
+                </p>
+              </div>
+            ))
+          }
+
+          <p class="qtitle spaced">◆ INVENTORY ◆</p>
+          {
+            stack.map((group) => (
+              <p class="inv">
+                <b>{group.label.toUpperCase()}:</b> {group.items.join(' · ')}
+              </p>
+            ))
+          }
+
+          <p class="qtitle spaced">◆ LORE ◆</p>
+          <p class="lore">
+            Petroleum engineer by degree (UT Austin) — twenty-plus years
+            shipping software instead. CTO, principal architect, tech lead,
+            and the contractor who parachutes in when it's on fire. Patent US
+            8,887,290 B1. Home base: Georgetown, TX.
+          </p>
+          <p class="guilds">GUILDS SERVED: {clients.join(' · ')}</p>
+
+          <p class="cont">
+            CONTINUE? <a href={`mailto:${contact.email}`}>INSERT COIN → {contact.email}</a><span class="blink" aria-hidden="true">▮</span>
+          </p>
+          <p class="social">
+            <a href={contact.linkedin}>[LINKEDIN]</a>
+            <a href={contact.github}>[GITHUB]</a>
+          </p>
+        </div>
+      </div>
+      <p class="credit">© 1999–∞ SOMETIMES CREEK VENTURES · GEORGETOWN TX · FREE PLAY · NO CONTINUES NEEDED</p>
+    </main>
+    <VariantSwitcher current="arcade" />
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #12041f; font-family: ui-monospace, 'Cascadia Mono', monospace; color: #fff; padding: 2.5rem 1rem 5rem; }
+  .cab { max-width: 66rem; margin: 0 auto; }
+  .marq {
+    text-align: center; font-weight: 700; letter-spacing: 0.3em; padding: 0.8rem;
+    background: linear-gradient(90deg, #ff004d, #ffa300, #ffec27, #00e436, #29adff, #ff77a8);
+    color: #12041f; font-size: 1rem;
+  }
+  .screen { border: 8px solid #29adff; outline: 8px solid #12041f; box-shadow: 0 0 0 16px #ff004d; margin-top: 1.5rem; background: #1d2b53; display: grid; grid-template-columns: minmax(17rem, 1fr) 1.7fr; }
+  .char { padding: 2rem 1.5rem; border-right: 4px dashed #29adff; }
+  .p1 { color: #ffec27; font-weight: 700; letter-spacing: 0.2em; }
+  .sprite { margin: 1rem 0; width: 84px; }
+  .hat { width: 84px; height: 22px; background: #ff004d; clip-path: polygon(0 100%, 0 40%, 15% 40%, 15% 0, 85% 0, 85% 40%, 100% 40%, 100% 100%); }
+  .face { width: 84px; height: 30px; background: #ffccaa; position: relative; }
+  .face::before, .face::after { content: ''; position: absolute; top: 8px; width: 10px; height: 10px; background: #12041f; }
+  .face::before { left: 16px; } .face::after { right: 16px; }
+  .body { width: 84px; height: 26px; background: #29adff; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 0.95; text-shadow: 4px 4px 0 #ff004d; }
+  .class { margin-top: 0.7rem; color: #ffec27; font-size: 0.8rem; letter-spacing: 0.1em; }
+  .stats { margin-top: 1.2rem; display: grid; gap: 0.55rem; }
+  .stat { display: grid; grid-template-columns: 6.5rem 1fr 2.2rem; gap: 0.6rem; align-items: center; font-size: 0.72rem; }
+  .bar { height: 0.85rem; background: #12041f; border: 2px solid #29adff; display: block; }
+  .fill { display: block; height: 100%; background: repeating-linear-gradient(90deg, #00e436 0 8px, #00b62f 8px 16px); }
+  .lvl { color: #00e436; text-align: right; }
+  .special { margin-top: 1.2rem; font-size: 0.72rem; color: #ff77a8; line-height: 1.6; }
+  .combo { margin-top: 1.6rem; border-top: 2px dashed #29adff; padding-top: 1.2rem; }
+  .combo-title { color: #ffec27; letter-spacing: 0.2em; font-size: 0.75rem; }
+  .combo-seq { margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+  .key { background: #12041f; border: 2px solid #ffec27; border-bottom-width: 4px; color: #ffec27; font-weight: 700; font-size: 0.7rem; padding: 0.25rem 0.45rem; border-radius: 4px; }
+  .plus { color: #ff77a8; font-weight: 700; }
+  .combo-notes { margin-top: 0.9rem; list-style: none; display: grid; gap: 0.5rem; }
+  .combo-notes li { font-family: system-ui, sans-serif; font-size: 0.78rem; line-height: 1.5; color: #c2cdea; }
+  .right { padding: 2rem 1.5rem; }
+  .qtitle { color: #ffec27; letter-spacing: 0.2em; font-size: 0.8rem; margin-bottom: 1.1rem; }
+  .qtitle.spaced { margin-top: 2rem; }
+  .quest { margin-bottom: 1rem; }
+  .qname { font-size: 0.85rem; letter-spacing: 0.05em; line-height: 1.5; }
+  .done { color: #00e436; }
+  .live { color: #ffa300; }
+  .qlink { color: #29adff; text-decoration: none; margin-left: 0.4rem; }
+  .qlink:hover { color: #ffec27; }
+  .qbody { margin-top: 0.3rem; font-family: system-ui, sans-serif; font-size: 0.85rem; line-height: 1.55; color: #c2cdea; max-width: 38rem; }
+  .inv { font-size: 0.75rem; line-height: 1.7; color: #c2cdea; margin-bottom: 0.5rem; }
+  .inv b { color: #29adff; }
+  .lore { font-family: system-ui, sans-serif; font-size: 0.88rem; line-height: 1.6; color: #c2cdea; max-width: 38rem; }
+  .guilds { margin-top: 0.9rem; font-size: 0.7rem; letter-spacing: 0.08em; color: #83769c; line-height: 1.8; }
+  .cont { margin-top: 2rem; font-size: 0.95rem; color: #ffec27; }
+  .cont a { color: #ffec27; font-weight: 700; }
+  .blink { margin-left: 0.3rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    .blink { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  }
+  .social { margin-top: 0.9rem; }
+  .social a { color: #29adff; text-decoration: none; margin-right: 0.7rem; }
+  .social a:hover { color: #ffec27; }
+  .credit { text-align: center; margin-top: 1.4rem; font-size: 0.7rem; letter-spacing: 0.2em; color: #83769c; }
+  a:focus-visible { outline: 3px solid #ffec27; outline-offset: 2px; }
+  @media (max-width: 780px) { .screen { grid-template-columns: 1fr; } .char { border-right: 0; border-bottom: 4px dashed #29adff; } }
+</style>

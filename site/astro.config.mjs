@@ -7,7 +7,15 @@ export default defineConfig({
   site: 'https://sometimescreekventures.com',
   output: 'static',
   trailingSlash: 'never',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // The design variants are shareable alternates, not indexable pages.
+      filter: (page) =>
+        !['/flood', '/os', '/arcade'].some((v) =>
+          new URL(page).pathname.startsWith(v),
+        ),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
