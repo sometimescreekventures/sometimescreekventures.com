@@ -2,12 +2,11 @@
 import { contact } from '../data/site';
 
 const nav = [
-  { href: '/work', label: 'Work' },
-  { href: '/open-source', label: 'Open Source' },
-  { href: '/about', label: 'About' },
+  { href: '/#list', label: 'The List' },
+  { href: '/#method', label: 'Method' },
+  { href: '/#stack', label: 'Stack' },
+  { href: '/#me', label: 'Me' },
 ];
-
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
 <header class="border-b-4 border-ink">
@@ -20,22 +19,12 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     >
       Sometimes Creek Ventures<span class="text-accent">.</span>
     </a>
-    <nav aria-label="Main" class="flex items-baseline gap-5 sm:gap-7">
+    <nav aria-label="Main" class="flex items-baseline gap-4 sm:gap-7">
       {
         nav.map((item) => (
           <a
             href={item.href}
-            aria-current={
-              path === item.href || path.startsWith(item.href + '/')
-                ? 'page'
-                : undefined
-            }
-            class:list={[
-              'text-sm font-semibold tracking-wide uppercase',
-              path === item.href || path.startsWith(item.href + '/')
-                ? 'text-accent-deep underline decoration-2 underline-offset-4'
-                : 'text-ink hover:text-accent-deep',
-            ]}
+            class="text-sm font-semibold tracking-wide text-ink uppercase hover:text-accent-deep"
           >
             {item.label}
           </a>
@@ -45,7 +34,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
         href={`mailto:${contact.email}`}
         class="text-sm font-semibold tracking-wide text-ink uppercase hover:text-accent-deep"
       >
-        Contact <span aria-hidden="true">↗</span>
+        Email <span aria-hidden="true">↗</span>
       </a>
     </nav>
   </div>

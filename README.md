@@ -52,10 +52,9 @@ npm run dev        # dev server on http://localhost:4321
 npm run build      # static build to site/dist
 ```
 
-Content is data-driven: case studies and open-source projects are content
-collections under `site/src/content/`, and everything else (clients, engagement
-models, contact) lives in `site/src/data/site.ts`. The contact email is defined
-in exactly one place.
+The site is a single page plus a 404. All content — stories, stack, ticker,
+contact — lives in `site/src/data/site.ts`. The contact email is defined in
+exactly one place.
 
 ## Infrastructure
 
