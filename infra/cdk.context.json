@@ -2,5 +2,9 @@
   "hosted-zone:account=111111111111:domainName=sometimescreekventures.com:region=us-east-1": {
     "Id": "/hostedzone/Z0000000TESTZONE",
     "Name": "sometimescreekventures.com."
+  },
+  "hosted-zone:account=740239807030:domainName=sometimescreekventures.com:region=us-east-1": {
+    "Id": "/hostedzone/Z78ITBGPBWAJ5",
+    "Name": "sometimescreekventures.com."
   }
 }

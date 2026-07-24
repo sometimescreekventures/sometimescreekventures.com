@@ -23,3 +23,4 @@ npm-debug.log*
 
 # Local tooling
 .claude/
+infra/cdk-outputs.json
