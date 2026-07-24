@@ -29,7 +29,6 @@ export const contact = {
 export const ticker = [
   'Rocket telemetry',
   'Drive-thru voice AI',
-  'Horse heartbeats',
   'Human hearts',
   'Fracking pumps',
   'Military radios',
@@ -57,14 +56,9 @@ export const stories = [
       'R&D for Chick-fil-A: a voice-ordering system built in Swift on OpenAI and open-source LLMs, backend on Kubernetes — plus AI and VR prototypes for visualizing the store itself.',
   },
   {
-    hook: 'Horse heartbeats',
-    story:
-      'An IoT platform streaming live heartbeat and respiration from sensors in horse stalls — BLE and MQTT into AWS IoT Core, real-time dashboards for the humans watching.',
-  },
-  {
     hook: 'Human hearts',
     story:
-      'Then the same problem with human stakes: a HIPAA cardiovascular remote-monitoring platform — five production Go services, device telemetry through Redis hot storage into S3 archive, live clinical dashboards — designed, built, and operated in production alone. Deploys never blip a live monitoring session.',
+      'A HIPAA cardiovascular remote-monitoring platform: five production Go services, device telemetry streaming through Redis hot storage into S3 archive, live clinical dashboards — designed, built, and operated in production alone. Deploys never blip a live monitoring session.',
   },
   {
     hook: 'The 36-second request',
