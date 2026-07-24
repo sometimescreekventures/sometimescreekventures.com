@@ -68,13 +68,22 @@ npm ci
 npm test                       # snapshot + assertion tests, no AWS needed
 npx cdk synth -q               # also works without credentials
 
+# Authenticate (AWS CLI SSO):
+aws sso login
+aws sts get-caller-identity    # sanity-check you're in the right account
+
 # First time in the account/region:
-npx cdk bootstrap aws://ACCOUNT_ID/us-east-1 --profile YOUR_PROFILE
+npx cdk bootstrap aws://ACCOUNT_ID/us-east-1
 
 # Always diff before deploying:
-npx cdk diff --profile YOUR_PROFILE
-npx cdk deploy --profile YOUR_PROFILE
+npx cdk diff
+npx cdk deploy
 ```
+
+The CDK uses the default AWS credential chain, so whatever `aws sts
+get-caller-identity` resolves to is what deploys. If you use a named SSO
+profile instead, add `--profile <name>` (or export `AWS_PROFILE`) to the
+`bootstrap`/`diff`/`deploy` commands.
 
 Assumptions checked at synth/deploy time:
 
