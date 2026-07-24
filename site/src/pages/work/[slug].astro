@@ -1,9 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import PageHero from '../../components/PageHero.astro';
 import StatRow from '../../components/StatRow.astro';
-import CreekLine from '../../components/CreekLine.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work');
@@ -21,34 +19,39 @@ const { Content } = await render(entry);
   title={`${entry.data.client}: ${entry.data.title} | Sometimes Creek Ventures`}
   description={entry.data.summary}
 >
-  <PageHero
-    eyebrow={`${entry.data.client} · ${entry.data.role}`}
-    title={entry.data.title}
-  >
-    <p class="mt-4 max-w-2xl leading-relaxed text-mist">
-      {entry.data.summary}
-    </p>
-  </PageHero>
-  <article class="mx-auto max-w-5xl px-5 pt-12 sm:px-8">
-    <StatRow stats={entry.data.stats} />
+  <article class="mx-auto max-w-6xl px-5 pt-14 sm:px-8 sm:pt-20">
+    <header>
+      <p class="text-xs font-semibold tracking-widest text-accent-deep uppercase">
+        {entry.data.client} · {entry.data.role}
+      </p>
+      <h1
+        class="mt-4 max-w-4xl font-display leading-[0.98] font-extrabold tracking-tight uppercase"
+        style="font-size: clamp(2.2rem, 6.5vw, 4.5rem);"
+      >
+        {entry.data.title}
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed font-medium text-graphite">
+        {entry.data.summary}
+      </p>
+    </header>
 
-    <div class="mt-6">
-      <CreekLine />
-    </div>
+    <StatRow stats={entry.data.stats} class="mt-10" />
 
-    <div class="prose-scv mt-6">
+    <div class="prose-scv mt-4">
       <Content />
     </div>
 
-    <footer class="mt-12">
-      <h2 class="text-xs font-medium tracking-widest text-flint uppercase">
+    <footer class="mt-14">
+      <h2 class="text-xs font-semibold tracking-widest text-fog uppercase">
         Stack
       </h2>
-      <ul class="mt-3 flex flex-wrap gap-2">
+      <ul class="mt-3 flex flex-wrap gap-x-5 gap-y-2">
         {
           entry.data.stack.map((item) => (
-            <li class="rounded-full border border-silt bg-bone px-3 py-1 text-sm text-flint">
+            <li class="text-sm font-semibold text-graphite">
+              <span aria-hidden="true" class="text-accent-deep">[</span>
               {item}
+              <span aria-hidden="true" class="text-accent-deep">]</span>
             </li>
           ))
         }
@@ -56,7 +59,7 @@ const { Content } = await render(entry);
       <p class="mt-10">
         <a
           href="/work"
-          class="text-sm font-medium text-river underline underline-offset-4 hover:text-river-deep"
+          class="text-sm font-bold tracking-wide text-ink uppercase underline decoration-accent decoration-4 underline-offset-4 hover:text-accent-deep"
         >
           <span aria-hidden="true">←</span> All case studies
         </a>

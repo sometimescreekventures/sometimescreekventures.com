@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import CreekLine from '../components/CreekLine.astro';
-import TopoField from '../components/TopoField.astro';
+import Marquee from '../components/Marquee.astro';
+import SectionHead from '../components/SectionHead.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { clients, contact, engagements, person, site } from '../data/site';
 
@@ -13,7 +13,7 @@ const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 
-/** Home-card leads: each case study fronted by its strongest number. */
+/** Home rows lead with each case study's strongest number. */
 const leads: Record<string, { value: string; label: string }> = {
   'cvs-health': {
     value: '15+',
@@ -29,150 +29,121 @@ const leads: Record<string, { value: string; label: string }> = {
   description={site.description}
 >
   <!-- Hero -->
-  <section class="on-night relative overflow-hidden bg-night text-bone">
-    <TopoField class="pointer-events-none absolute inset-0 h-full w-full" />
-    <div
-      class="relative mx-auto max-w-5xl px-5 pt-20 pb-32 sm:px-8 sm:pt-28 sm:pb-40"
+  <section class="mx-auto max-w-6xl px-5 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
+    <p class="text-sm font-semibold tracking-widest uppercase">
+      {person.name} — independent, senior, hands-on
+    </p>
+    <h1
+      class="mt-6 font-display leading-[0.92] font-extrabold tracking-tight uppercase"
+      style="font-size: clamp(3rem, 11.5vw, 8.5rem);"
     >
-      <p class="text-sm font-medium tracking-widest text-glow uppercase">
-        {person.name}
-      </p>
-      <h1
-        class="mt-4 max-w-3xl font-display text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl md:text-7xl"
-      >
-        Cloud&nbsp;&amp;&nbsp;AI <span class="text-glow">Solutions</span> Architect
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-mist">
+      <span class="block">Cloud &amp; AI</span>
+      <span class="outline-word block">Solutions</span>
+      <span class="block">Architect<span class="text-accent">.</span></span>
+    </h1>
+    <div
+      class="mt-8 flex flex-wrap items-baseline justify-between gap-x-10 gap-y-5"
+    >
+      <p class="max-w-xl text-lg leading-relaxed font-medium text-graphite">
         {person.thesis}
       </p>
-      <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+      <div class="flex flex-wrap items-baseline gap-6">
         <a
           href={`mailto:${contact.email}`}
-          class="inline-block rounded-md bg-glow px-5 py-2.5 text-sm font-semibold text-night hover:bg-glow-soft"
+          class="max-w-full bg-ink px-4 py-3 text-[13px] font-bold tracking-wide break-all text-paper uppercase hover:bg-accent-deep sm:px-5 sm:text-sm"
         >
           {contact.email}
         </a>
         <a
           href="/work"
-          class="text-sm font-medium text-glow underline underline-offset-4 hover:text-glow-soft"
+          class="text-sm font-bold tracking-wide text-ink uppercase underline decoration-accent decoration-4 underline-offset-4 hover:text-accent-deep"
         >
           See the work <span aria-hidden="true">→</span>
         </a>
       </div>
     </div>
-    <CreekLine
-      variant="hero"
-      animate
-      class="pointer-events-none absolute inset-x-0 bottom-0 h-28 w-full sm:h-36"
-    />
   </section>
 
-  <!-- Client strip -->
-  <section aria-labelledby="clients-heading" class="border-y border-silt/70 bg-bone">
-    <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
-      <h2
-        id="clients-heading"
-        class="text-xs font-medium tracking-widest text-flint uppercase"
+  <Marquee items={clients} label="Client engagements" />
+
+  <!-- 01 Selected work -->
+  <section
+    aria-labelledby="work-heading"
+    class="mx-auto max-w-6xl px-5 pt-16 sm:px-8"
+  >
+    <SectionHead number="01" title="Selected work">
+      <a
+        href="/work"
+        class="text-sm font-bold tracking-wide text-ink uppercase underline decoration-accent decoration-4 underline-offset-4 hover:text-accent-deep"
       >
-        Client engagements
-      </h2>
-      <ul
-        class="mt-5 flex flex-wrap gap-x-8 gap-y-3 font-display text-lg font-medium tracking-tight text-bedrock"
-      >
-        {clients.map((client) => <li>{client}</li>)}
-      </ul>
+        All case studies <span aria-hidden="true">→</span>
+      </a>
+    </SectionHead>
+    <div class="mt-8">
+      {
+        work.map((entry) => (
+          <WorkCard
+            href={`/work/${entry.data.slug}`}
+            client={entry.data.client}
+            title={entry.data.title}
+            summary={entry.data.summary}
+            lead={leads[entry.data.slug] ?? entry.data.stats[0]!}
+          />
+        ))
+      }
     </div>
   </section>
 
-  <!-- Engagement models -->
-  <section aria-labelledby="engagements-heading">
-    <div class="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-20">
-      <h2
-        id="engagements-heading"
-        class="font-display text-2xl font-semibold tracking-tight sm:text-3xl"
+  <!-- 02 Ways to engage -->
+  <section
+    aria-labelledby="engage-heading"
+    class="mx-auto max-w-6xl px-5 pt-16 sm:px-8"
+  >
+    <SectionHead number="02" title="Ways to engage" />
+    <dl class="mt-8">
+      {
+        engagements.map((engagement) => (
+          <div class="grid gap-x-8 gap-y-1 border-t border-ink py-6 sm:grid-cols-[minmax(11rem,18rem)_1fr]">
+            <dt class="font-display text-lg font-extrabold tracking-tight uppercase">
+              {engagement.name}
+            </dt>
+            <dd class="leading-relaxed text-graphite">{engagement.detail}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <!-- 03 Open source -->
+  <section
+    aria-labelledby="oss-heading"
+    class="mx-auto max-w-6xl px-5 pt-16 sm:px-8"
+  >
+    <SectionHead number="03" title="Open source">
+      <a
+        href="/open-source"
+        class="text-sm font-bold tracking-wide text-ink uppercase underline decoration-accent decoration-4 underline-offset-4 hover:text-accent-deep"
       >
-        Four ways to engage
-      </h2>
-      <dl class="mt-8 divide-y divide-silt/70 border-y border-silt/70">
-        {
-          engagements.map((engagement) => (
-            <div class="grid gap-x-8 gap-y-1 py-5 sm:grid-cols-[14rem_1fr]">
-              <dt class="font-display font-semibold tracking-tight">
-                {engagement.name}
-              </dt>
-              <dd class="leading-relaxed text-flint">{engagement.detail}</dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
-  </section>
-
-  <!-- Featured work -->
-  <section aria-labelledby="work-heading" class="border-t border-silt/70">
-    <div class="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-20">
-      <div class="flex flex-wrap items-baseline justify-between gap-4">
-        <h2
-          id="work-heading"
-          class="font-display text-2xl font-semibold tracking-tight sm:text-3xl"
-        >
-          Selected work
-        </h2>
-        <a
-          href="/work"
-          class="text-sm font-medium text-river underline underline-offset-4 hover:text-river-deep"
-        >
-          All case studies <span aria-hidden="true">→</span>
-        </a>
-      </div>
-      <div class="mt-8 grid gap-5 md:grid-cols-3">
-        {
-          work.map((entry) => (
-            <WorkCard
-              href={`/work/${entry.data.slug}`}
-              client={entry.data.client}
-              title={entry.data.title}
-              summary={entry.data.summary}
-              lead={leads[entry.data.slug] ?? entry.data.stats[0]!}
-            />
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Open source teaser -->
-  <section aria-labelledby="oss-heading" class="border-t border-silt/70">
-    <div class="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-20">
-      <div class="flex flex-wrap items-baseline justify-between gap-4">
-        <h2
-          id="oss-heading"
-          class="font-display text-2xl font-semibold tracking-tight sm:text-3xl"
-        >
-          Open source
-        </h2>
-        <a
-          href="/open-source"
-          class="text-sm font-medium text-river underline underline-offset-4 hover:text-river-deep"
-        >
-          Why these exist <span aria-hidden="true">→</span>
-        </a>
-      </div>
-      <ul class="mt-8 space-y-5">
-        {
-          projects.map((project) => (
-            <li class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        Why these exist <span aria-hidden="true">→</span>
+      </a>
+    </SectionHead>
+    <div class="mt-8">
+      {
+        projects.map((project) => (
+          <div class="grid gap-x-8 gap-y-1 border-t border-ink py-6 sm:grid-cols-[minmax(11rem,18rem)_1fr]">
+            <h3>
               <a
                 href={project.data.repoUrl}
-                class="font-display text-lg font-semibold tracking-tight text-river underline underline-offset-4 hover:text-river-deep"
+                class="font-display text-lg font-extrabold tracking-tight text-ink uppercase hover:text-accent-deep"
               >
                 {project.data.title}
+                <span aria-hidden="true" class="text-accent-deep">↗</span>
               </a>
-              <span class="text-flint">{project.data.tagline}</span>
-            </li>
-          ))
-        }
-      </ul>
+            </h3>
+            <p class="leading-relaxed text-graphite">{project.data.tagline}</p>
+          </div>
+        ))
+      }
     </div>
   </section>
 </Base>

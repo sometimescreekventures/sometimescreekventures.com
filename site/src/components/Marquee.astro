@@ -1,0 +1,26 @@
+---
+/**
+ * Black client ticker. The scrolling track is decorative (aria-hidden);
+ * a visually-hidden list carries the names for assistive tech, and the
+ * track wraps statically under prefers-reduced-motion.
+ */
+interface Props {
+  items: readonly string[];
+  label: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<section aria-label={label} class="border-y-4 border-ink bg-ink text-paper">
+  <ul class="sr-only">
+    {items.map((item) => <li>{item}</li>)}
+  </ul>
+  <div class="marquee py-3" aria-hidden="true">
+    <div
+      class="marquee-track font-display text-sm font-bold tracking-widest uppercase"
+    >
+      {[...items, ...items].map((item) => <span>{item}</span>)}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+/** Numbered editorial section header: 01 / TITLE / optional side link. */
+interface Props {
+  number: string;
+  title: string;
+}
+
+const { number, title } = Astro.props;
+---
+
+<div class="flex flex-wrap items-baseline justify-between gap-4 border-t-4 border-ink pt-5">
+  <h2 class="flex items-baseline gap-5">
+    <span
+      class="font-display text-2xl font-extrabold text-accent-deep tabular-nums"
+      aria-hidden="true">{number}</span
+    >
+    <span
+      class="font-display text-3xl font-extrabold tracking-tight uppercase sm:text-4xl"
+      >{title}</span
+    >
+  </h2>
+  <slot />
+</div>

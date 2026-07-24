@@ -3,27 +3,17 @@
 @import '@fontsource-variable/inter';
 
 /*
- * Design tokens — Texas Hill Country register.
- * limestone / bone / silt: dry-creek neutrals (bg, surface, hairline)
- * bedrock / flint: ink and secondary ink
- * river / river-deep: the one water-toned accent
+ * Editorial system — paper, ink, safety orange.
+ * accent is for large type and graphic elements only;
+ * accent-deep passes AA at small sizes.
  */
 @theme {
-  --color-limestone: #f4f1ea;
-  --color-bone: #fbfaf5;
-  --color-silt: #e1dbcd;
-  --color-bedrock: #221f1a;
-  --color-flint: #5d574c;
-  --color-river: #14606f;
-  --color-river-deep: #0d4551;
-
-  /* Night register — the dark hero/footer bands. */
-  --color-night: #131512;
-  --color-night-soft: #1c1f1b;
-  --color-contour: #363b35;
-  --color-mist: #a9aca3;
-  --color-glow: #4fd8c2;
-  --color-glow-soft: #7ce4d3;
+  --color-paper: #f4f4f2;
+  --color-ink: #0e0e0e;
+  --color-graphite: #3c3c3a;
+  --color-fog: #6b6b65;
+  --color-accent: #ff4400;
+  --color-accent-deep: #bd3000;
 
   --font-display:
     'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
@@ -33,8 +23,8 @@
 }
 
 html {
-  background-color: var(--color-limestone);
-  color: var(--color-bedrock);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   scroll-behavior: smooth;
 }
@@ -46,91 +36,74 @@ html {
 }
 
 ::selection {
-  background-color: var(--color-river);
-  color: var(--color-bone);
+  background-color: var(--color-accent);
+  color: var(--color-paper);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-river);
+  outline: 3px solid var(--color-accent-deep);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 
-/* On dark bands the river outline is invisible; use the glow accent. */
-.on-night :focus-visible {
-  outline-color: var(--color-glow);
+/* Display headline with an outlined ("knocked-out") word. */
+.outline-word {
+  color: var(--color-paper);
+  -webkit-text-stroke: 2.5px var(--color-ink);
 }
 
-/* Card hover lift — disabled under reduced motion. */
-@media (prefers-reduced-motion: no-preference) {
-  .lift {
-    transition:
-      transform 200ms ease,
-      box-shadow 200ms ease,
-      border-color 200ms ease;
-  }
-
-  .lift:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px -16px rgb(20 96 111 / 0.35);
+@media (max-width: 640px) {
+  .outline-word {
+    -webkit-text-stroke-width: 1.5px;
   }
 }
 
-/* The signature creek line draws itself in once, on load only. */
-.creek-path {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .creek-path--animate {
-    stroke-dashoffset: 1;
-    animation: creek-draw 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.15s forwards;
-  }
-
-  @keyframes creek-draw {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-}
-
-/* Case-study prose. Scoped by class so no global element styles leak. */
+/* Case-study prose, editorial register. */
 .prose-scv {
   max-width: 65ch;
 }
 
 .prose-scv h2 {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.35rem;
+  font-weight: 800;
+  font-size: 1.4rem;
+  text-transform: uppercase;
   letter-spacing: -0.01em;
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
+  margin-top: 3rem;
+  margin-bottom: 0.9rem;
+}
+
+.prose-scv h2::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 4px;
+  background: var(--color-accent);
+  margin-top: 0.5rem;
 }
 
 .prose-scv p {
-  color: var(--color-flint);
+  color: var(--color-graphite);
   line-height: 1.75;
   margin-bottom: 1.1rem;
 }
 
 .prose-scv strong {
-  color: var(--color-bedrock);
-  font-weight: 600;
+  color: var(--color-ink);
+  font-weight: 650;
   font-variant-numeric: tabular-nums;
 }
 
 .prose-scv ul {
-  color: var(--color-flint);
+  color: var(--color-graphite);
   line-height: 1.75;
-  margin: 1.1rem 0 1.1rem 1.25rem;
+  margin: 1.1rem 0 1.1rem 0;
   list-style: none;
+  padding: 0;
 }
 
 .prose-scv li {
   position: relative;
-  padding-left: 1.1rem;
+  padding-left: 1.4rem;
   margin-bottom: 0.55rem;
 }
 
@@ -138,22 +111,64 @@ html {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.72em;
-  width: 0.45rem;
-  height: 2px;
-  background-color: var(--color-river);
+  top: 0.62em;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: var(--color-accent);
 }
 
 .prose-scv a {
-  color: var(--color-river);
+  color: var(--color-ink);
+  font-weight: 600;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
 
 .prose-scv a:hover {
-  color: var(--color-river-deep);
+  color: var(--color-accent-deep);
 }
 
 .prose-scv em {
   font-style: italic;
+}
+
+/* Client marquee — static wrap under reduced motion. */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 3rem;
+  padding-left: 1.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee-scroll 32s linear infinite;
+  }
+
+  @keyframes marquee-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    white-space: normal;
+  }
+
+  .marquee-track {
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    padding: 0 1.5rem;
+  }
+
+  .marquee-track > span:nth-child(n + 10) {
+    display: none;
+  }
 }

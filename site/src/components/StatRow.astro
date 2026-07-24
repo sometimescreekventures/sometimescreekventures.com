@@ -7,14 +7,19 @@ interface Props {
 const { stats, class: className = '' } = Astro.props;
 ---
 
-<dl class:list={['grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3', className]}>
+<dl
+  class:list={[
+    'grid border-t-4 border-ink sm:grid-cols-2 lg:grid-cols-3',
+    className,
+  ]}
+>
   {
     stats.map((stat) => (
-      <div class="border-l-2 border-river pl-4">
-        <dd class="font-display text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl">
-          {stat.value}
+      <div class="border-b border-ink py-5 pr-6">
+        <dd class="font-display text-3xl font-extrabold tracking-tight tabular-nums sm:text-4xl">
+          {stat.value}<span class="text-accent">.</span>
         </dd>
-        <dt class="mt-1 text-sm leading-snug text-flint">{stat.label}</dt>
+        <dt class="mt-1 text-sm leading-snug text-fog">{stat.label}</dt>
       </div>
     ))
   }

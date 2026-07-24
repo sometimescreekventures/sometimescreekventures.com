@@ -1,7 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
-import CreekLine from '../components/CreekLine.astro';
 import { contact, person } from '../data/site';
 ---
 
@@ -9,51 +7,59 @@ import { contact, person } from '../data/site';
   title="About — Sean Denton | Sometimes Creek Ventures"
   description="Sean Denton: 15+ years designing and building scalable cloud architectures. Founder of Sometimes Creek Ventures LLC, Georgetown, TX."
 >
-  <PageHero eyebrow={person.name} title="About" />
-  <div class="mx-auto max-w-5xl px-5 pt-12 sm:px-8">
-    <div class="grid gap-10 md:grid-cols-[16rem_1fr] md:gap-14">
+  <div class="mx-auto max-w-6xl px-5 pt-14 sm:px-8 sm:pt-20">
+    <h1
+      class="font-display leading-[0.92] font-extrabold tracking-tight uppercase"
+      style="font-size: clamp(3rem, 10vw, 7rem);"
+    >
+      About<span class="text-accent">.</span>
+    </h1>
+
+    <div class="mt-12 grid gap-10 md:grid-cols-[16rem_1fr] md:gap-14">
       <div>
         <!-- TODO(sean): replace placeholder with a real photo (square-ish, ~640px). -->
         <div
-          class="flex aspect-square items-end justify-start overflow-hidden rounded-lg border border-silt bg-bone p-4"
+          class="relative aspect-square border-4 border-ink bg-ink/5"
           role="img"
           aria-label="Photo of Sean Denton coming soon"
         >
-          <CreekLine class="opacity-70" />
+          <span
+            class="absolute right-3 bottom-3 block h-6 w-6 bg-accent"
+            aria-hidden="true"></span>
         </div>
         <dl class="mt-6 space-y-4 text-sm">
           <div>
-            <dt class="font-medium text-xs tracking-widest text-flint uppercase">
+            <dt class="text-xs font-semibold tracking-widest text-fog uppercase">
               Based in
             </dt>
-            <dd class="mt-1 text-bedrock">{person.location}</dd>
+            <dd class="mt-1 font-medium">{person.location}</dd>
           </div>
           <div>
-            <dt class="font-medium text-xs tracking-widest text-flint uppercase">
+            <dt class="text-xs font-semibold tracking-widest text-fog uppercase">
               Education
             </dt>
-            <dd class="mt-1 text-bedrock">{person.education}</dd>
+            <dd class="mt-1 font-medium">{person.education}</dd>
           </div>
           <div>
-            <dt class="font-medium text-xs tracking-widest text-flint uppercase">
+            <dt class="text-xs font-semibold tracking-widest text-fog uppercase">
               Patent
             </dt>
-            <dd class="mt-1 text-bedrock">{person.patent}</dd>
+            <dd class="mt-1 font-medium">{person.patent}</dd>
           </div>
           <div>
-            <dt class="font-medium text-xs tracking-widest text-flint uppercase">
+            <dt class="text-xs font-semibold tracking-widest text-fog uppercase">
               Elsewhere
             </dt>
-            <dd class="mt-1 flex gap-4">
+            <dd class="mt-1 flex gap-5">
               <a
                 href={contact.github}
-                class="text-river underline underline-offset-4 hover:text-river-deep"
+                class="font-bold text-ink underline decoration-accent decoration-2 underline-offset-3 hover:text-accent-deep"
               >
                 GitHub
               </a>
               <a
                 href={contact.linkedin}
-                class="text-river underline underline-offset-4 hover:text-river-deep"
+                class="font-bold text-ink underline decoration-accent decoration-2 underline-offset-3 hover:text-accent-deep"
               >
                 LinkedIn
               </a>
