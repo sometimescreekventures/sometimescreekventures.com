@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import StatRow from '../../components/StatRow.astro';
+import CreekLine from '../../components/CreekLine.astro';
+
+export async function getStaticPaths() {
+  const work = await getCollection('work');
+  return work.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Base
+  title={`${entry.data.client}: ${entry.data.title} | Sometimes Creek Ventures`}
+  description={entry.data.summary}
+>
+  <article class="mx-auto max-w-5xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <header>
+      <p class="text-xs font-medium tracking-widest text-river uppercase">
+        {entry.data.client} · {entry.data.role}
+      </p>
+      <h1
+        class="mt-3 max-w-3xl font-display text-3xl leading-tight font-semibold tracking-tight sm:text-4xl"
+      >
+        {entry.data.title}
+      </h1>
+      <p class="mt-4 max-w-2xl leading-relaxed text-flint">
+        {entry.data.summary}
+      </p>
+    </header>
+
+    <StatRow stats={entry.data.stats} class="mt-10" />
+
+    <div class="mt-6">
+      <CreekLine />
+    </div>
+
+    <div class="prose-scv mt-6">
+      <Content />
+    </div>
+
+    <footer class="mt-12">
+      <h2 class="text-xs font-medium tracking-widest text-flint uppercase">
+        Stack
+      </h2>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {
+          entry.data.stack.map((item) => (
+            <li class="rounded-full border border-silt bg-bone px-3 py-1 text-sm text-flint">
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-10">
+        <a
+          href="/work"
+          class="text-sm font-medium text-river underline underline-offset-4 hover:text-river-deep"
+        >
+          <span aria-hidden="true">←</span> All case studies
+        </a>
+      </p>
+    </footer>
+  </article>
+</Base>

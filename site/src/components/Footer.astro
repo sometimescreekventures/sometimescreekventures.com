@@ -1,0 +1,49 @@
+---
+import { contact, person, site } from '../data/site';
+import CreekLine from './CreekLine.astro';
+---
+
+<footer class="mt-24">
+  <div class="mx-auto max-w-5xl px-5 sm:px-8">
+    <CreekLine />
+    <section aria-labelledby="contact-heading" class="pt-10 pb-14">
+      <h2
+        id="contact-heading"
+        class="font-display text-2xl font-semibold tracking-tight sm:text-3xl"
+      >
+        Have something that needs to ship?
+      </h2>
+      <p class="mt-3 max-w-xl leading-relaxed text-flint">
+        Every engagement runs through {site.legalName}. Email is the fastest way
+        to reach me — a couple of sentences about what you're building is
+        plenty.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <a
+          href={`mailto:${contact.email}`}
+          class="inline-block rounded-md bg-river px-5 py-2.5 text-sm font-medium text-bone hover:bg-river-deep"
+        >
+          {contact.email}
+        </a>
+        <a
+          href={contact.linkedin}
+          class="text-sm text-flint underline underline-offset-4 hover:text-river"
+        >
+          LinkedIn
+        </a>
+        <a
+          href={contact.github}
+          class="text-sm text-flint underline underline-offset-4 hover:text-river"
+        >
+          GitHub
+        </a>
+      </div>
+    </section>
+    <div
+      class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-t border-silt/70 py-6 text-xs text-flint"
+    >
+      <p>© {site.legalName}</p>
+      <p>{person.location}</p>
+    </div>
+  </div>
+</footer>

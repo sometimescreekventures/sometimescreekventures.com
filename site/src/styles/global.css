@@ -1,0 +1,131 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/inter';
+
+/*
+ * Design tokens — Texas Hill Country register.
+ * limestone / bone / silt: dry-creek neutrals (bg, surface, hairline)
+ * bedrock / flint: ink and secondary ink
+ * river / river-deep: the one water-toned accent
+ */
+@theme {
+  --color-limestone: #f4f1ea;
+  --color-bone: #fbfaf5;
+  --color-silt: #e1dbcd;
+  --color-bedrock: #221f1a;
+  --color-flint: #5d574c;
+  --color-river: #14606f;
+  --color-river-deep: #0d4551;
+
+  --font-display:
+    'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
+}
+
+html {
+  background-color: var(--color-limestone);
+  color: var(--color-bedrock);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background-color: var(--color-river);
+  color: var(--color-bone);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-river);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* The signature creek line draws itself in once, on load only. */
+.creek-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .creek-path--animate {
+    stroke-dashoffset: 1;
+    animation: creek-draw 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.15s forwards;
+  }
+
+  @keyframes creek-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+/* Case-study prose. Scoped by class so no global element styles leak. */
+.prose-scv {
+  max-width: 65ch;
+}
+
+.prose-scv h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-scv p {
+  color: var(--color-flint);
+  line-height: 1.75;
+  margin-bottom: 1.1rem;
+}
+
+.prose-scv strong {
+  color: var(--color-bedrock);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose-scv ul {
+  color: var(--color-flint);
+  line-height: 1.75;
+  margin: 1.1rem 0 1.1rem 1.25rem;
+  list-style: none;
+}
+
+.prose-scv li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: 0.55rem;
+}
+
+.prose-scv li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.45rem;
+  height: 2px;
+  background-color: var(--color-river);
+}
+
+.prose-scv a {
+  color: var(--color-river);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-scv a:hover {
+  color: var(--color-river-deep);
+}
+
+.prose-scv em {
+  font-style: italic;
+}

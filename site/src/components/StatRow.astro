@@ -1,0 +1,21 @@
+---
+interface Props {
+  stats: { label: string; value: string }[];
+  class?: string;
+}
+
+const { stats, class: className = '' } = Astro.props;
+---
+
+<dl class:list={['grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3', className]}>
+  {
+    stats.map((stat) => (
+      <div class="border-l-2 border-river pl-4">
+        <dd class="font-display text-2xl font-semibold tracking-tight tabular-nums">
+          {stat.value}
+        </dd>
+        <dt class="mt-1 text-sm leading-snug text-flint">{stat.label}</dt>
+      </div>
+    ))
+  }
+</dl>

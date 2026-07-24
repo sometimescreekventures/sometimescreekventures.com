@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import CreekLine from '../components/CreekLine.astro';
+import { contact, person } from '../data/site';
+---
+
+<Base
+  title="About — Sean Denton | Sometimes Creek Ventures"
+  description="Sean Denton: 15+ years designing and building scalable cloud architectures. Founder of Sometimes Creek Ventures LLC, Georgetown, TX."
+>
+  <div class="mx-auto max-w-5xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <h1 class="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+      About
+    </h1>
+
+    <div class="mt-10 grid gap-10 md:grid-cols-[16rem_1fr] md:gap-14">
+      <div>
+        <!-- TODO(sean): replace placeholder with a real photo (square-ish, ~640px). -->
+        <div
+          class="flex aspect-square items-end justify-start overflow-hidden rounded-lg border border-silt bg-bone p-4"
+          role="img"
+          aria-label="Photo of Sean Denton coming soon"
+        >
+          <CreekLine class="opacity-70" />
+        </div>
+        <dl class="mt-6 space-y-4 text-sm">
+          <div>
+            <dt class="font-medium text-xs tracking-widest text-flint uppercase">
+              Based in
+            </dt>
+            <dd class="mt-1 text-bedrock">{person.location}</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-xs tracking-widest text-flint uppercase">
+              Education
+            </dt>
+            <dd class="mt-1 text-bedrock">{person.education}</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-xs tracking-widest text-flint uppercase">
+              Patent
+            </dt>
+            <dd class="mt-1 text-bedrock">{person.patent}</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-xs tracking-widest text-flint uppercase">
+              Elsewhere
+            </dt>
+            <dd class="mt-1 flex gap-4">
+              <a
+                href={contact.github}
+                class="text-river underline underline-offset-4 hover:text-river-deep"
+              >
+                GitHub
+              </a>
+              <a
+                href={contact.linkedin}
+                class="text-river underline underline-offset-4 hover:text-river-deep"
+              >
+                LinkedIn
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="prose-scv">
+        <p>
+          I'm Sean Denton, a cloud and AI solutions architect with 15+ years
+          designing and building scalable cloud architectures. I run every
+          engagement through Sometimes Creek Ventures LLC, my consulting
+          company, from Georgetown, Texas — remote-first, working with teams
+          wherever they are.
+        </p>
+        <p>
+          I studied petroleum engineering at The University of Texas at Austin
+          and hold a patent on browser-based content protection (US 8,887,290
+          B1). The through-line of the work since: regulated, data-intensive
+          platforms — healthcare, aerospace, transportation, retail — where the
+          architecture, the security model, and the operational reality all
+          have to hold up at once.
+        </p>
+        <h2>How I work</h2>
+        <p>
+          I take on the parts of a build that are hard to delegate: the
+          architecture, the data and security model, the infrastructure, and
+          the path to production. Then I stay accountable through deployment
+          and operation — the system running is the deliverable, not the
+          design document. That works equally well solo, as it did building
+          Cardio's monitoring platform end to end, or anchoring a larger team,
+          as it does leading a 15+ engineer squad at CVS Health.
+        </p>
+        <p>
+          The name? A sometimes creek is a Texas Hill Country stream that runs
+          dry most of the year — then runs strong when the rain comes. It's an
+          honest description of good contract engineering: not always on your
+          payroll, fully there when you need it.
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+
+const work = (await getCollection('work')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Base
+  title="Work — Sean Denton | Sometimes Creek Ventures"
+  description="Case studies: a Fortune-5 cloud platform automation program, a HIPAA remote patient-monitoring platform built solo, and a performance rescue proven against baselines."
+>
+  <div class="mx-auto max-w-5xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <h1 class="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+      Work
+    </h1>
+    <p class="mt-4 max-w-2xl leading-relaxed text-flint">
+      Three engagements, three shapes of the same job: own the hard parts —
+      architecture, data and security model, infrastructure, path to
+      production — and stay accountable until it runs.
+    </p>
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      {
+        work.map((entry) => (
+          <WorkCard
+            href={`/work/${entry.data.slug}`}
+            client={entry.data.client}
+            title={entry.data.title}
+            summary={entry.data.summary}
+            lead={entry.data.stats[0]!}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Base>

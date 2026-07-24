@@ -1,0 +1,6 @@
+{
+  "hosted-zone:account=111111111111:domainName=sometimescreekventures.com:region=us-east-1": {
+    "Id": "/hostedzone/Z0000000TESTZONE",
+    "Name": "sometimescreekventures.com."
+  }
+}

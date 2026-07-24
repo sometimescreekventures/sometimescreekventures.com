@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import CreekLine from '../components/CreekLine.astro';
+---
+
+<Base
+  title="Page not found | Sometimes Creek Ventures"
+  description="This page doesn't exist. The creek bed is dry here."
+>
+  <div class="mx-auto max-w-5xl px-5 pt-24 sm:px-8 sm:pt-32">
+    <p class="font-display text-6xl font-semibold tracking-tight text-river tabular-nums">
+      404
+    </p>
+    <h1 class="mt-4 font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+      Dry creek bed.
+    </h1>
+    <p class="mt-3 max-w-md leading-relaxed text-flint">
+      Nothing flows through this channel. The page you're looking for doesn't
+      exist — or has moved downstream.
+    </p>
+    <div class="mt-6">
+      <CreekLine />
+    </div>
+    <p class="mt-8">
+      <a
+        href="/"
+        class="inline-block rounded-md bg-river px-5 py-2.5 text-sm font-medium text-bone hover:bg-river-deep"
+      >
+        Back to the source
+      </a>
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CreekLine from '../components/CreekLine.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const rendered = await Promise.all(
+  projects.map(async (project) => ({
+    project,
+    Content: (await render(project)).Content,
+  })),
+);
+---
+
+<Base
+  title="Open Source — blurt & yap | Sometimes Creek Ventures"
+  description="blurt and yap: fully local push-to-talk dictation for macOS and Linux. Local AI, shipped as product."
+>
+  <div class="mx-auto max-w-5xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <h1 class="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+      Open source
+    </h1>
+    <p class="mt-4 max-w-2xl leading-relaxed text-flint">
+      Two dictation tools, one thesis: local AI, shipped as product.
+    </p>
+
+    <div class="mt-12 space-y-12">
+      {
+        rendered.map(({ project, Content }) => (
+          <section
+            aria-labelledby={`project-${project.data.title}`}
+            class="rounded-lg border border-silt bg-bone p-6 sm:p-8"
+          >
+            <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+              <h2
+                id={`project-${project.data.title}`}
+                class="font-display text-2xl font-semibold tracking-tight"
+              >
+                {project.data.title}
+              </h2>
+              <p class="text-flint">{project.data.tagline}</p>
+            </div>
+            <div class="prose-scv mt-4">
+              <Content />
+            </div>
+            <ul class="mt-2 space-y-2">
+              {project.data.highlights.map((highlight) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-flint">
+                  <span
+                    aria-hidden="true"
+                    class="mt-2.5 h-0.5 w-3 shrink-0 bg-river"
+                  />
+                  {highlight}
+                </li>
+              ))}
+            </ul>
+            <p class="mt-6">
+              <a
+                href={project.data.repoUrl}
+                class="text-sm font-medium text-river underline underline-offset-4 hover:text-river-deep"
+              >
+                {project.data.repoUrl.replace('https://', '')}
+              </a>
+            </p>
+          </section>
+        ))
+      }
+    </div>
+
+    <div class="mt-14 max-w-2xl">
+      <CreekLine />
+      <p class="mt-6 leading-relaxed text-flint">
+        These aren't side projects. Talking to AI is now half of how engineers
+        work, and typing speed is the bottleneck — so Sean built the tools that
+        remove it. They connect directly to how Sometimes Creek Ventures
+        delivers: the AI-augmented methodology proven in the
+        <a
+          href="/work/zonal"
+          class="text-river underline underline-offset-4 hover:text-river-deep"
+        >
+          Zonal performance rescue</a
+        >, and enterprise voice-AI work for Chick-fil-A. Local AI, shipped as
+        product.
+      </p>
+    </div>
+  </div>
+</Base>

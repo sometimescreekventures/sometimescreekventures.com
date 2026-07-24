@@ -1,0 +1,63 @@
+---
+/**
+ * The signature element: a single meandering creek line.
+ * variant="hero" threads the hero; variant="divider" separates sections.
+ */
+interface Props {
+  variant?: 'hero' | 'divider';
+  animate?: boolean;
+  class?: string;
+}
+
+const { variant = 'divider', animate = false, class: className = '' } = Astro.props;
+---
+
+{
+  variant === 'hero' ? (
+    <svg
+      viewBox="0 0 1200 160"
+      fill="none"
+      aria-hidden="true"
+      preserveAspectRatio="none"
+      class={className}
+    >
+      <path
+        class:list={['creek-path', { 'creek-path--animate': animate }]}
+        pathLength="1"
+        d="M-20 128 C 90 122, 150 84, 235 80 C 330 76, 355 132, 450 128 C 545 124, 580 60, 665 52 C 760 44, 800 96, 880 100 C 970 104, 1010 48, 1090 40 C 1150 34, 1190 52, 1230 48"
+        stroke="var(--color-river)"
+        stroke-width="2"
+        stroke-linecap="round"
+        vector-effect="non-scaling-stroke"
+      />
+      <path
+        d="M-20 138 C 95 132, 160 98, 245 94 C 335 90, 362 142, 455 138 C 548 134, 588 76, 672 68 C 762 60, 806 108, 886 112 C 972 116, 1016 64, 1094 56 C 1152 50, 1192 66, 1230 62"
+        stroke="var(--color-silt)"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        vector-effect="non-scaling-stroke"
+      />
+      <path
+        d="M-20 118 C 85 112, 142 70, 227 66 C 324 62, 348 122, 445 118 C 542 114, 572 46, 658 38 C 756 30, 794 84, 874 88 C 968 92, 1004 34, 1086 26 C 1148 20, 1188 40, 1230 36"
+        stroke="var(--color-silt)"
+        stroke-width="1"
+        stroke-linecap="round"
+        vector-effect="non-scaling-stroke"
+      />
+    </svg>
+  ) : (
+    <svg
+      viewBox="0 0 240 16"
+      fill="none"
+      aria-hidden="true"
+      class={`h-4 w-60 ${className}`}
+    >
+      <path
+        d="M0 10 C 22 9, 32 4, 50 4 C 70 4, 74 12, 94 12 C 114 12, 120 5, 140 4 C 160 3, 168 11, 188 11 C 208 11, 220 6, 240 6"
+        stroke="var(--color-river)"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+    </svg>
+  )
+}
