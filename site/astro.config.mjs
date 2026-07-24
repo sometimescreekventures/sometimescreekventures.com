@@ -11,7 +11,7 @@ export default defineConfig({
     sitemap({
       // The design variants are shareable alternates, not indexable pages.
       filter: (page) =>
-        !['/flood', '/os', '/arcade'].some((v) =>
+        !['/flood', '/os', '/arcade', '/noir', '/zen'].some((v) =>
           new URL(page).pathname.startsWith(v),
         ),
     }),

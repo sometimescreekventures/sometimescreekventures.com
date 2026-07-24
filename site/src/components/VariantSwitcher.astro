@@ -1,7 +1,7 @@
 ---
 /** Fixed bottom switcher for flipping between the live design variants. */
 interface Props {
-  current: 'paper' | 'flood' | 'os' | 'arcade';
+  current: 'paper' | 'flood' | 'os' | 'arcade' | 'noir' | 'zen';
   /** Extra bottom offset (e.g. above the OS taskbar). */
   raised?: boolean;
 }
@@ -13,6 +13,8 @@ const variants = [
   { id: 'flood', label: 'FLOOD', href: '/flood' },
   { id: 'os', label: 'OS', href: '/os' },
   { id: 'arcade', label: 'ARCADE', href: '/arcade' },
+  { id: 'noir', label: 'NOIR', href: '/noir' },
+  { id: 'zen', label: 'ZEN', href: '/zen' },
 ] as const;
 ---
 

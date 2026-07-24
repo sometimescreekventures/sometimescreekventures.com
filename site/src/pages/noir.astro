@@ -1,0 +1,174 @@
+---
+import VariantSwitcher from '../components/VariantSwitcher.astro';
+import {
+  clients,
+  contact,
+  method,
+  now,
+  site,
+  stack,
+  stories,
+} from '../data/site';
+
+const roman = [
+  'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X',
+  'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI',
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Noir — Sean Denton | Sometimes Creek Ventures</title>
+    <meta name="description" content={site.description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main>
+      <div class="beam" aria-hidden="true"></div>
+      <header class="poster">
+        <p class="studio">SOMETIMES CREEK VENTURES PRESENTS</p>
+        <h1 class="title">THE MAN WHO<br />SHIPS AT<br />MIDNIGHT</h1>
+        <p class="tagline">Every system was impossible. He built them anyway.</p>
+        <a class="ticket" href={`mailto:${contact.email}`}>NOW CASTING YOUR PROJECT → {contact.email}</a>
+      </header>
+
+      <section class="block" aria-labelledby="filmography-h">
+        <p class="label" id="filmography-h">— THE FILMOGRAPHY —</p>
+        <div class="acts">
+          {
+            stories.map((s, i) => (
+              <article>
+                <p class="act">REEL {roman[i]}</p>
+                <h2>{s.hook.toUpperCase()}</h2>
+                <p class="line">{s.story}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="method-h">
+        <p class="label" id="method-h">— HOW EVERY PICTURE GETS MADE —</p>
+        <p class="loop">
+          {method.loop.map((step, i) => (
+            <>
+              <span>{step.toUpperCase()}</span>
+              {i < method.loop.length - 1 && <span class="sep" aria-hidden="true"> · </span>}
+            </>
+          ))}
+        </p>
+        <div class="lines">
+          {method.lines.map((line) => <p class="line">{line}</p>)}
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="credits-h">
+        <p class="label" id="credits-h">— TECHNICAL CREDITS —</p>
+        <div class="credits-grid">
+          {
+            stack.map((group) => (
+              <div class="credit">
+                <p class="dept">{group.label.toUpperCase()}</p>
+                <p class="names">{group.items.join(' · ')}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="nowshowing-h">
+        <p class="label" id="nowshowing-h">— NOW SHOWING —</p>
+        <div class="marquee-box">
+          {
+            now.map((item) => (
+              <p class="showing">
+                {item.what}
+                {'links' in item &&
+                  item.links?.map((link) => (
+                    <a class="showlink" href={link.href}>
+                      [{link.label}]
+                    </a>
+                  ))}
+              </p>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="block credits" aria-labelledby="lead-h">
+        <p class="starring" id="lead-h">STARRING</p>
+        <p class="name">SEAN DENTON</p>
+        <p class="roles">
+          AS THE ARCHITECT · THE TECH LEAD · THE CTO · AND THE GUY STILL WRITING THE CODE
+        </p>
+        <div class="fineblock">
+          <p>
+            PETROLEUM ENGINEER BY DEGREE (UT AUSTIN) · TWENTY-PLUS YEARS SHIPPING SOFTWARE INSTEAD ·
+            PATENT US 8,887,290 B1
+          </p>
+          <p>
+            DIRECTED BY <b>SEAN DENTON</b> · WRITTEN BY <b>SEAN DENTON</b> · PRODUCED BY <b>SEAN DENTON</b>
+          </p>
+          <p>
+            SHOT ON LOCATION IN <b>GEORGETOWN, TX</b> · RUNNING TIME <b>20+ YEARS</b> · NOT RATED — <b>PROVEN</b>
+          </p>
+          <p class="also">ALSO APPEARING: {clients.join(' · ')}</p>
+        </div>
+        <a class="ticket" href={`mailto:${contact.email}`}>{contact.email}</a>
+        <p class="social">
+          <a href={contact.linkedin}>LINKEDIN</a> · <a href={contact.github}>GITHUB</a> · © {site.legalName}
+        </p>
+      </section>
+    </main>
+    <VariantSwitcher current="noir" />
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: radial-gradient(circle at 50% 8%, rgba(255,255,255,0.13), transparent 42%), #0a0a0a;
+    color: #e8e8e8; font-family: Georgia, 'Times New Roman', serif; text-align: center;
+  }
+  main { position: relative; max-width: 56rem; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+  .beam {
+    position: absolute; left: 50%; top: -4rem; width: 36rem; height: 32rem; pointer-events: none;
+    background: conic-gradient(from 194deg at 50% 0%, transparent 0deg, rgba(255,255,255,0.09) 14deg, transparent 32deg);
+    transform: translateX(-50%);
+  }
+  .studio { font-family: system-ui, sans-serif; font-size: 0.65rem; letter-spacing: 0.5em; color: #8a8a8a; }
+  .title { margin-top: 1.5rem; font-weight: 700; font-size: clamp(2.8rem, 10vw, 6.5rem); line-height: 0.98; letter-spacing: 0.04em; text-shadow: 0 0 40px rgba(255,255,255,0.28); }
+  .tagline { margin-top: 1.5rem; font-style: italic; font-size: 1.15rem; color: #b8b8b8; }
+  .ticket { display: inline-block; margin-top: 2rem; font-family: system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.14em; font-weight: 700; color: #0a0a0a; background: #e8e8e8; padding: 0.85rem 1.4rem; text-decoration: none; }
+  .ticket:hover { background: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+  .block { margin-top: 4.5rem; border-top: 1px solid #333; padding-top: 2.25rem; }
+  .label { font-family: system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.5em; color: #8a8a8a; }
+  .acts { margin-top: 2rem; display: grid; gap: 2.25rem; }
+  .act { font-family: system-ui, sans-serif; font-size: 0.6rem; letter-spacing: 0.5em; color: #8a8a8a; }
+  h2 { margin-top: 0.45rem; font-size: 1.3rem; letter-spacing: 0.14em; font-weight: 700; }
+  .line { margin: 0.7rem auto 0; max-width: 40rem; font-family: system-ui, sans-serif; font-size: 0.88rem; line-height: 1.7; color: #a8a8a8; }
+  .loop { margin-top: 1.5rem; font-size: clamp(1.2rem, 3.5vw, 1.9rem); letter-spacing: 0.22em; font-weight: 700; }
+  .sep { color: #666; }
+  .lines { margin-top: 1.25rem; display: grid; gap: 0.6rem; }
+  .credits-grid { margin-top: 1.75rem; display: grid; gap: 1.5rem; }
+  .dept { font-family: system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.4em; color: #b8b8b8; }
+  .names { margin: 0.4rem auto 0; max-width: 42rem; font-family: system-ui, sans-serif; font-size: 0.78rem; line-height: 1.8; color: #8a8a8a; }
+  .marquee-box { margin: 1.75rem auto 0; max-width: 38rem; border: 1px solid #444; padding: 1.5rem; display: grid; gap: 0.9rem; box-shadow: 0 0 30px rgba(255,255,255,0.06) inset; }
+  .showing { font-family: system-ui, sans-serif; font-size: 0.85rem; line-height: 1.6; color: #c8c8c8; }
+  .showlink { color: #e8e8e8; font-weight: 700; margin-left: 0.4rem; text-decoration: none; border-bottom: 1px solid #666; }
+  .showlink:hover { border-color: #e8e8e8; }
+  .starring { font-family: system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.5em; color: #8a8a8a; }
+  .name { margin-top: 0.7rem; font-size: clamp(2rem, 6vw, 3.4rem); letter-spacing: 0.22em; font-weight: 700; }
+  .roles { margin-top: 0.7rem; font-family: system-ui, sans-serif; font-size: 0.68rem; letter-spacing: 0.22em; color: #b8b8b8; line-height: 1.9; }
+  .fineblock { margin: 2rem auto 0; max-width: 44rem; font-family: system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.14em; color: #8a8a8a; line-height: 2.1; }
+  .fineblock b { color: #d8d8d8; }
+  .also { margin-top: 0.8rem; }
+  .social { margin-top: 1.5rem; font-family: system-ui, sans-serif; font-size: 0.68rem; letter-spacing: 0.18em; color: #8a8a8a; }
+  .social a { color: #b8b8b8; text-decoration: none; }
+  .social a:hover { color: #fff; }
+  a:focus-visible { outline: 2px solid #e8e8e8; outline-offset: 3px; }
+</style>

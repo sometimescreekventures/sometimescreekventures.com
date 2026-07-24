@@ -1,0 +1,59 @@
+---
+import { contact, stories } from '../../data/site';
+const picks = stories.slice(0, 4);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" /><title>Concept: Zen</title>
+  </head>
+  <body>
+    <main>
+      <span class="enso" aria-hidden="true"></span>
+      <section class="hero">
+        <p class="vert" aria-hidden="true">静かに出荷する</p>
+        <div class="center">
+          <h1>Ship<br />quietly<span class="dot">.</span></h1>
+          <p class="sub">One engineer. Twenty-plus years.<br />Nothing extra. Everything delivered.</p>
+          <a class="mail" href={`mailto:${contact.email}`}>{contact.email}</a>
+        </div>
+      </section>
+      <section class="stones">
+        {picks.map((s, i) => (
+          <article class="stone">
+            <span class="mark" aria-hidden="true">{['一', '二', '三', '四'][i]}</span>
+            <h2>{s.hook}</h2>
+            <p>{s.story}</p>
+          </article>
+        ))}
+      </section>
+      <p class="haiku">dry creek in the hills —<br />when the summer rain arrives<br />everything moves fast</p>
+    </main>
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #faf9f5; color: #26241f; font-family: Georgia, 'Times New Roman', serif; padding: 5rem 1.5rem; }
+  main { position: relative; max-width: 58rem; margin: 0 auto; }
+  .enso {
+    position: absolute; right: -2rem; top: -3rem; width: 17rem; height: 17rem; border-radius: 50%;
+    border: 0.9rem solid rgba(38, 36, 31, 0.85); border-left-color: transparent; transform: rotate(-30deg);
+    filter: blur(0.6px); opacity: 0.12;
+  }
+  .hero { display: flex; gap: 3rem; align-items: flex-start; }
+  .vert { writing-mode: vertical-rl; font-size: 1.1rem; letter-spacing: 0.5em; color: #b8b2a4; }
+  h1 { font-weight: 400; font-size: clamp(3.4rem, 11vw, 7.5rem); line-height: 1; letter-spacing: -0.02em; }
+  .dot { color: #b8321a; }
+  .sub { margin-top: 2rem; font-size: 1.05rem; line-height: 2; color: #6d685c; }
+  .mail { display: inline-block; margin-top: 2.25rem; font-family: system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; color: #26241f; border-bottom: 1px solid #b8321a; padding-bottom: 0.2rem; text-decoration: none; }
+  .mail:hover { color: #b8321a; }
+  .stones { margin-top: 6rem; display: grid; gap: 3.5rem 3rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
+  .stone { max-width: 26rem; }
+  .stone:nth-child(even) { margin-top: 2.5rem; }
+  .mark { display: inline-grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: #26241f; color: #faf9f5; font-size: 1.05rem; }
+  h2 { margin-top: 1rem; font-weight: 400; font-size: 1.3rem; }
+  .stone p { margin-top: 0.7rem; font-family: system-ui, sans-serif; font-size: 0.85rem; line-height: 1.8; color: #6d685c; }
+  .haiku { margin-top: 6rem; text-align: center; font-style: italic; font-size: 1.05rem; line-height: 2.1; color: #8a8474; }
+</style>

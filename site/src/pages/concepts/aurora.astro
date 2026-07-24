@@ -1,0 +1,54 @@
+---
+import { contact, stories } from '../../data/site';
+const picks = stories.slice(0, 4);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" /><title>Concept: Aurora</title>
+  </head>
+  <body>
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="blob b3" aria-hidden="true"></div>
+    <main>
+      <p class="kicker">SEAN DENTON — ENGINEER</p>
+      <h1>Systems from<br /><em>nothing</em> to<br />production<span class="dot">.</span></h1>
+      <p class="sub">Rockets. Drive-thrus. Hospitals. Tractors. Twenty-plus years, one engineer, everything shipped.</p>
+      <a class="cta" href={`mailto:${contact.email}`}>{contact.email}</a>
+      <section class="glass">
+        {picks.map((s) => (
+          <article><h2>{s.hook}</h2><p>{s.story}</p></article>
+        ))}
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #0b0b12; color: #f2f1f7; font-family: system-ui, sans-serif; min-height: 100vh; overflow-x: hidden; padding: 4.5rem 1.5rem; }
+  .blob { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.65; z-index: 0; }
+  .b1 { width: 44rem; height: 44rem; left: -12rem; top: -14rem; background: radial-gradient(circle, #ff5f6d, #b23dd6 70%); }
+  .b2 { width: 38rem; height: 38rem; right: -10rem; top: 8rem; background: radial-gradient(circle, #2bd2ff, #2b6bff 70%); }
+  .b3 { width: 34rem; height: 34rem; left: 30%; bottom: -16rem; background: radial-gradient(circle, #ffd166, #ff7b54 70%); }
+  @media (prefers-reduced-motion: no-preference) {
+    .blob { animation: drift 22s ease-in-out infinite alternate; }
+    .b2 { animation-duration: 27s; animation-delay: -8s; }
+    .b3 { animation-duration: 31s; animation-delay: -15s; }
+    @keyframes drift { to { transform: translate(4rem, -3rem) scale(1.12); } }
+  }
+  main { position: relative; z-index: 1; max-width: 62rem; margin: 0 auto; }
+  .kicker { font-size: 0.72rem; letter-spacing: 0.35em; color: rgba(242,241,247,0.65); }
+  h1 { margin-top: 1.5rem; font-weight: 750; font-size: clamp(3rem, 10vw, 7.5rem); line-height: 0.95; letter-spacing: -0.035em; }
+  h1 em { font-style: italic; font-weight: 400; }
+  .dot { color: #2bd2ff; }
+  .sub { margin-top: 1.5rem; max-width: 30rem; line-height: 1.7; color: rgba(242,241,247,0.75); font-size: 1.05rem; }
+  .cta { display: inline-block; margin-top: 1.75rem; padding: 0.85rem 1.4rem; border-radius: 999px; color: #0b0b12; background: #f2f1f7; font-weight: 700; text-decoration: none; }
+  .cta:hover { background: #2bd2ff; }
+  .glass { margin-top: 4rem; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+  article { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16); border-radius: 1.1rem; padding: 1.4rem; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  h2 { font-size: 1rem; letter-spacing: 0.02em; }
+  article p { margin-top: 0.55rem; font-size: 0.85rem; line-height: 1.6; color: rgba(242,241,247,0.72); }
+</style>

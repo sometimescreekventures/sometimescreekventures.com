@@ -1,0 +1,188 @@
+---
+import VariantSwitcher from '../components/VariantSwitcher.astro';
+import {
+  clients,
+  contact,
+  method,
+  now,
+  site,
+  stack,
+  stories,
+} from '../data/site';
+
+const kanji = [
+  '一', '二', '三', '四', '五', '六', '七', '八',
+  '九', '十', '十一', '十二', '十三', '十四', '十五', '十六',
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Zen — Sean Denton | Sometimes Creek Ventures</title>
+    <meta name="description" content={site.description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main>
+      <span class="enso" aria-hidden="true"></span>
+
+      <section class="hero">
+        <p class="vert" aria-hidden="true">静かに出荷する</p>
+        <div>
+          <h1>Ship<br />quietly<span class="dot">.</span></h1>
+          <p class="sub">
+            Sean Denton. One engineer. Twenty-plus years.<br />
+            Nothing extra. Everything delivered.
+          </p>
+          <a class="mail" href={`mailto:${contact.email}`}>{contact.email}</a>
+        </div>
+      </section>
+
+      <section class="part" aria-labelledby="work-h">
+        <h2 class="part-title" id="work-h">The work</h2>
+        <div class="stones">
+          {
+            stories.map((s, i) => (
+              <article class="stone">
+                <span class="mark" aria-hidden="true">{kanji[i]}</span>
+                <h3>{s.hook}</h3>
+                <p>{s.story}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="part" aria-labelledby="way-h">
+        <h2 class="part-title" id="way-h">The way</h2>
+        <p class="path">
+          {method.loop.map((step, i) => (
+            <>
+              <span class="step">{step.toLowerCase()}</span>
+              {i < method.loop.length - 1 && <span class="stepdot" aria-hidden="true"> · </span>}
+            </>
+          ))}
+        </p>
+        <div class="precepts">
+          {method.lines.map((line) => <p>{line}</p>)}
+        </div>
+      </section>
+
+      <section class="part" aria-labelledby="tools-h">
+        <h2 class="part-title" id="tools-h">The tools</h2>
+        <div class="tools">
+          {
+            stack.map((group) => (
+              <p class="toolline">
+                <b>{group.label}</b> — {group.items.join(', ')}
+              </p>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="part" aria-labelledby="now-h">
+        <h2 class="part-title" id="now-h">Presently</h2>
+        <div class="present">
+          {
+            now.map((item) => (
+              <p>
+                {item.what}
+                {'links' in item &&
+                  item.links?.map((link) => (
+                    <a class="plink" href={link.href}>
+                      {link.label}
+                    </a>
+                  ))}
+              </p>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="part" aria-labelledby="person-h">
+        <h2 class="part-title" id="person-h">The person</h2>
+        <div class="prose">
+          <p>
+            Petroleum engineer by degree — The University of Texas at Austin —
+            twenty-plus years shipping software instead. CTO, principal
+            architect, tech lead, and the contractor who arrives when it's on
+            fire. A patent on browser-based content protection. Georgetown,
+            Texas.
+          </p>
+          <p>
+            The company is named for the creek on the land: dry most of the
+            year, running hard when the rain comes. Dormant channel. Full
+            capacity on demand.
+          </p>
+          <p class="names">{clients.join(' · ')}</p>
+        </div>
+      </section>
+
+      <footer class="close">
+        <p class="haiku">
+          dry creek in the hills —<br />
+          when the summer rain arrives<br />
+          everything moves fast
+        </p>
+        <a class="mail" href={`mailto:${contact.email}`}>{contact.email}</a>
+        <p class="fine">
+          <a href={contact.linkedin}>LinkedIn</a> · <a href={contact.github}>GitHub</a> · © {site.legalName}
+        </p>
+      </footer>
+    </main>
+    <VariantSwitcher current="zen" />
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: #faf9f5; color: #26241f; font-family: Georgia, 'Times New Roman', serif; padding: 5rem 1.5rem 6rem; }
+  main { position: relative; max-width: 58rem; margin: 0 auto; }
+  .enso {
+    position: absolute; right: -2rem; top: -3rem; width: 17rem; height: 17rem; border-radius: 50%;
+    border: 0.9rem solid rgba(38, 36, 31, 0.85); border-left-color: transparent; transform: rotate(-30deg);
+    filter: blur(0.6px); opacity: 0.12; pointer-events: none;
+  }
+  .hero { display: flex; gap: 3rem; align-items: flex-start; }
+  .vert { writing-mode: vertical-rl; font-size: 1.1rem; letter-spacing: 0.5em; color: #b8b2a4; }
+  h1 { font-weight: 400; font-size: clamp(3.4rem, 11vw, 7.5rem); line-height: 1; letter-spacing: -0.02em; }
+  .dot { color: #b8321a; }
+  .sub { margin-top: 2rem; font-size: 1.05rem; line-height: 2; color: #6d685c; }
+  .mail { display: inline-block; margin-top: 2rem; font-family: system-ui, sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; color: #26241f; border-bottom: 1px solid #b8321a; padding-bottom: 0.2rem; text-decoration: none; }
+  .mail:hover { color: #b8321a; }
+  .part { margin-top: 7rem; }
+  .part-title { font-weight: 400; font-size: 1.05rem; letter-spacing: 0.3em; text-transform: uppercase; color: #8a8474; }
+  .part-title::after { content: ''; display: block; width: 2.6rem; height: 1px; background: #b8321a; margin-top: 0.8rem; }
+  .stones { margin-top: 3rem; display: grid; gap: 3.25rem 3rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
+  .stone { max-width: 26rem; }
+  .stone:nth-child(even) { margin-top: 2rem; }
+  .mark { display: inline-grid; place-items: center; min-width: 2.6rem; height: 2.6rem; padding: 0 0.5rem; border-radius: 50%; background: #26241f; color: #faf9f5; font-size: 0.95rem; }
+  h3 { margin-top: 1rem; font-weight: 400; font-size: 1.3rem; }
+  .stone p { margin-top: 0.7rem; font-family: system-ui, sans-serif; font-size: 0.85rem; line-height: 1.8; color: #6d685c; }
+  .path { margin-top: 2.5rem; font-size: clamp(1.4rem, 4vw, 2.2rem); letter-spacing: 0.04em; }
+  .stepdot { color: #b8321a; }
+  .precepts { margin-top: 1.75rem; display: grid; gap: 0.9rem; max-width: 34rem; }
+  .precepts p { font-family: system-ui, sans-serif; font-size: 0.9rem; line-height: 1.8; color: #6d685c; }
+  .tools { margin-top: 2.25rem; display: grid; gap: 1rem; max-width: 44rem; }
+  .toolline { font-family: system-ui, sans-serif; font-size: 0.85rem; line-height: 1.9; color: #6d685c; }
+  .toolline b { color: #26241f; font-weight: 600; }
+  .present { margin-top: 2.25rem; display: grid; gap: 1rem; max-width: 40rem; }
+  .present p { font-size: 1rem; line-height: 1.9; color: #4c473c; }
+  .plink { font-family: system-ui, sans-serif; font-size: 0.8rem; color: #b8321a; margin-left: 0.6rem; text-decoration: none; border-bottom: 1px solid #b8321a; }
+  .prose { margin-top: 2.25rem; max-width: 38rem; display: grid; gap: 1.25rem; }
+  .prose p { font-size: 1rem; line-height: 2; color: #4c473c; }
+  .names { font-family: system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; color: #8a8474; line-height: 2; }
+  .close { margin-top: 7rem; text-align: center; }
+  .haiku { font-style: italic; font-size: 1.05rem; line-height: 2.1; color: #8a8474; }
+  .close .mail { margin-top: 2.5rem; }
+  .fine { margin-top: 1.75rem; font-family: system-ui, sans-serif; font-size: 0.68rem; letter-spacing: 0.14em; color: #8a8474; }
+  .fine a { color: #8a8474; }
+  .fine a:hover { color: #b8321a; }
+  a:focus-visible { outline: 2px solid #b8321a; outline-offset: 3px; }
+  @media (max-width: 640px) { .vert { display: none; } }
+</style>

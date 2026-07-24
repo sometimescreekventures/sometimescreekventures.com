@@ -1,0 +1,72 @@
+---
+import { contact, stories } from '../../data/site';
+const looks = stories.slice(0, 4);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" /><title>Concept: Couture</title>
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <h1>DENTON</h1>
+        <p class="issue">THE ENGINEERING ISSUE · GEORGETOWN · WORLDWIDE</p>
+      </header>
+      <section class="cover">
+        <p class="coverline l1">EXCLUSIVE: THE MAN<br />WHO SHIPS <em>EVERYTHING</em></p>
+        <div class="feature">
+          <span class="bigletter" aria-hidden="true">S</span>
+          <p class="deck">
+            He arrives without an entourage. No account manager, no delivery
+            team, no deck. By morning the architecture is drawn; by season's
+            end it's in production. <b>Rockets. Hospitals. Drive-thrus.
+            Tractors.</b> Twenty-plus years at the top of the line.
+          </p>
+        </div>
+        <p class="coverline l2">"IT'S JUST ME.<br />THAT'S THE POINT."</p>
+      </section>
+      <section class="looks">
+        <p class="lookhead">THE COLLECTION</p>
+        {looks.map((s, i) => (
+          <article class="look">
+            <span class="lookno">LOOK {String(i + 1).padStart(2, '0')}</span>
+            <h2>{s.hook}</h2>
+            <p>{s.story}</p>
+          </article>
+        ))}
+      </section>
+      <footer class="foot">
+        <p class="bookings">BOOKINGS — <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+        <p class="fine">NO RETOUCHING. ALL NUMBERS AS SHOT.</p>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #f7f4ef; color: #141210; font-family: 'Didot', 'Bodoni MT', Georgia, serif; padding: 3rem 1.5rem 4rem; }
+  main { max-width: 60rem; margin: 0 auto; }
+  .masthead { text-align: center; border-bottom: 2px solid #141210; padding-bottom: 1rem; }
+  h1 { font-size: clamp(4rem, 15vw, 10rem); line-height: 0.85; letter-spacing: 0.04em; font-weight: 700; }
+  .issue { margin-top: 0.8rem; font-family: system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.5em; }
+  .cover { position: relative; padding: 3rem 0 2.5rem; border-bottom: 1px solid #141210; }
+  .coverline { font-size: clamp(1.3rem, 3.6vw, 2.2rem); line-height: 1.15; font-weight: 700; letter-spacing: 0.02em; }
+  .coverline em { font-style: italic; color: #a3132e; }
+  .l2 { text-align: right; margin-top: 2.5rem; color: #a3132e; }
+  .feature { display: flex; gap: 1.5rem; margin-top: 2.5rem; max-width: 42rem; }
+  .bigletter { font-size: 7.5rem; line-height: 0.8; font-weight: 700; color: #a3132e; }
+  .deck { font-size: 1.05rem; line-height: 1.85; }
+  .deck b { letter-spacing: 0.04em; }
+  .looks { padding: 2.5rem 0; display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); border-bottom: 2px solid #141210; }
+  .lookhead { grid-column: 1 / -1; font-family: system-ui, sans-serif; font-size: 0.62rem; letter-spacing: 0.5em; }
+  .lookno { font-family: system-ui, sans-serif; font-size: 0.58rem; letter-spacing: 0.35em; color: #a3132e; }
+  .look h2 { margin-top: 0.5rem; font-size: 1.5rem; font-style: italic; }
+  .look p { margin-top: 0.6rem; font-family: system-ui, sans-serif; font-size: 0.82rem; line-height: 1.7; color: #4c4740; }
+  .foot { padding-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: baseline; }
+  .bookings { font-family: system-ui, sans-serif; font-size: 0.8rem; letter-spacing: 0.14em; font-weight: 700; }
+  .bookings a { color: #a3132e; }
+  .fine { font-family: system-ui, sans-serif; font-size: 0.58rem; letter-spacing: 0.3em; color: #8a857c; }
+</style>

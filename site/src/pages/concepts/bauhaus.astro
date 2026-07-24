@@ -1,0 +1,63 @@
+---
+import { contact, stories } from '../../data/site';
+import '@fontsource-variable/bricolage-grotesque';
+const picks = stories.slice(0, 4);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" /><title>Concept: Bauhaus</title>
+  </head>
+  <body>
+    <main>
+      <section class="poster">
+        <span class="shape circle" aria-hidden="true"></span>
+        <span class="shape tri" aria-hidden="true"></span>
+        <span class="shape bar" aria-hidden="true"></span>
+        <span class="shape halfmoon" aria-hidden="true"></span>
+        <h1><span class="l1">bau</span><span class="l2">t</span><span class="l3">alles</span></h1>
+        <p class="trans">("builds everything") — sean denton, engineer</p>
+        <p class="thesis">form follows shipping. rockets · drive-thrus · hospitals · tractors — twenty-plus years, one engineer.</p>
+        <a class="cta" href={`mailto:${contact.email}`}>{contact.email} →</a>
+      </section>
+      <section class="grid">
+        {picks.map((s, i) => (
+          <article class={`cell c${i % 4}`}>
+            <span class="num">{i + 1}</span>
+            <h2>{s.hook}</h2>
+            <p>{s.story}</p>
+          </article>
+        ))}
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #f2ead8; color: #1a1a1a; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; padding: 3rem 1.25rem 4rem; }
+  main { max-width: 62rem; margin: 0 auto; }
+  .poster { position: relative; background: #f8f3e6; border: 4px solid #1a1a1a; padding: 4rem 2.5rem 3rem; overflow: hidden; }
+  .shape { position: absolute; }
+  .circle { width: 13rem; height: 13rem; border-radius: 50%; background: #d93025; right: -3rem; top: -3rem; }
+  .tri { width: 0; height: 0; border-left: 5.5rem solid transparent; border-right: 5.5rem solid transparent; border-bottom: 9.5rem solid #f2b705; left: -2.5rem; bottom: -2rem; transform: rotate(18deg); }
+  .bar { width: 42%; height: 1.4rem; background: #1d4e89; left: 30%; top: 2.2rem; transform: rotate(-4deg); }
+  .halfmoon { width: 7rem; height: 3.5rem; background: #1a1a1a; border-radius: 0 0 7rem 7rem; right: 22%; bottom: 2.5rem; transform: rotate(-10deg); }
+  h1 { position: relative; font-weight: 800; font-size: clamp(4rem, 14vw, 9.5rem); line-height: 0.85; letter-spacing: -0.04em; text-transform: lowercase; }
+  .l1 { display: block; }
+  .l2 { color: #d93025; margin-left: 0.8em; }
+  .l3 { display: block; margin-left: 1.6em; color: #1d4e89; }
+  .trans { position: relative; margin-top: 1.25rem; font-size: 0.8rem; letter-spacing: 0.18em; }
+  .thesis { position: relative; margin-top: 0.9rem; max-width: 26rem; line-height: 1.6; font-weight: 500; }
+  .cta { position: relative; display: inline-block; margin-top: 1.5rem; font-weight: 800; color: #f8f3e6; background: #1a1a1a; padding: 0.7rem 1.1rem; text-decoration: none; }
+  .cta:hover { background: #d93025; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); border: 4px solid #1a1a1a; border-top: 0; }
+  .cell { padding: 1.5rem; border-right: 4px solid #1a1a1a; position: relative; min-height: 14rem; }
+  .cell:last-child { border-right: 0; }
+  .c0 { background: #f8f3e6; } .c1 { background: #f2b705; } .c2 { background: #d93025; color: #f8f3e6; } .c3 { background: #1d4e89; color: #f8f3e6; }
+  .num { font-size: 2.2rem; font-weight: 800; }
+  h2 { margin-top: 0.6rem; text-transform: lowercase; font-weight: 800; font-size: 1.05rem; }
+  .cell p { margin-top: 0.5rem; font-size: 0.78rem; line-height: 1.55; }
+  @media (max-width: 720px) { .cell { border-right: 0; border-bottom: 4px solid #1a1a1a; } .cell:last-child { border-bottom: 0; } }
+</style>

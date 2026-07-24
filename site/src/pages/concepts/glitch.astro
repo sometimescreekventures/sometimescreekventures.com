@@ -1,0 +1,56 @@
+---
+import { contact, stories } from '../../data/site';
+import '@fontsource-variable/bricolage-grotesque';
+const picks = stories.slice(0, 4);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" /><title>Concept: Glitch</title>
+  </head>
+  <body>
+    <main>
+      <p class="sig">SIGNAL ACQUIRED ▮▯▮▯ SEAN DENTON — ENGINEER</p>
+      <h1 class="glitch" data-text="I BREAK NOTHING. I FIX EVERYTHING.">I BREAK NOTHING.<br />I FIX EVERYTHING.</h1>
+      <p class="sub">Corrupted systems restored: 36-second requests, 1-in-10 timeouts, stalled estimates, dead pipelines. Twenty-plus years of signal recovery.</p>
+      <a class="cta" href={`mailto:${contact.email}`}>&gt;&gt; {contact.email}</a>
+      <section class="rows">
+        {picks.map((s, i) => (
+          <article class="row">
+            <span class="tag">FIXED_{String(i + 1).padStart(3, '0')}</span>
+            <h2 class="glitch small" data-text={s.hook.toUpperCase()}>{s.hook.toUpperCase()}</h2>
+            <p>{s.story}</p>
+          </article>
+        ))}
+      </section>
+      <p class="bar" aria-hidden="true"></p>
+    </main>
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #050505; color: #eaeaea; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; padding: 4rem 1.5rem; overflow-x: hidden; }
+  main { max-width: 62rem; margin: 0 auto; }
+  .sig { font-family: ui-monospace, monospace; font-size: 0.7rem; letter-spacing: 0.3em; color: #7a7a7a; }
+  .glitch { position: relative; margin-top: 1.5rem; font-weight: 800; text-transform: uppercase; font-size: clamp(2.4rem, 8.5vw, 6.5rem); line-height: 0.95; letter-spacing: -0.02em; }
+  .glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; overflow: hidden; white-space: pre-line; }
+  .glitch::before { color: #0ff; transform: translate(-3px, -2px); mix-blend-mode: screen; clip-path: inset(12% 0 55% 0); }
+  .glitch::after { color: #f0f; transform: translate(3px, 2px); mix-blend-mode: screen; clip-path: inset(60% 0 8% 0); }
+  @media (prefers-reduced-motion: no-preference) {
+    .glitch::before { animation: jerk 2.8s steps(2) infinite; }
+    .glitch::after { animation: jerk 2.3s steps(3) infinite reverse; }
+    @keyframes jerk { 0%, 92% { transform: translate(-3px, -2px); } 94% { transform: translate(6px, 1px); } 96% { transform: translate(-6px, 3px); } 98% { transform: translate(2px, -3px); } }
+  }
+  .small { font-size: 1.15rem; margin-top: 0; }
+  .sub { margin-top: 1.5rem; max-width: 32rem; line-height: 1.7; color: #a8a8a8; }
+  .cta { display: inline-block; margin-top: 1.5rem; font-family: ui-monospace, monospace; font-weight: 700; color: #050505; background: #0ff; padding: 0.7rem 1rem; text-decoration: none; }
+  .cta:hover { background: #f0f; }
+  .rows { margin-top: 3.5rem; display: grid; gap: 2rem; }
+  .row { border-top: 1px solid #2a2a2a; padding-top: 1.25rem; max-width: 44rem; }
+  .tag { font-family: ui-monospace, monospace; font-size: 0.62rem; letter-spacing: 0.25em; color: #0ff; }
+  .row h2 { position: relative; margin-top: 0.4rem; }
+  .row p { margin-top: 0.5rem; font-size: 0.88rem; line-height: 1.6; color: #a8a8a8; }
+  .bar { margin-top: 3rem; height: 0.8rem; background: repeating-linear-gradient(90deg, #0ff 0 8px, #f0f 8px 16px, #050505 16px 22px, #eaeaea 22px 24px, #050505 24px 40px); }
+</style>

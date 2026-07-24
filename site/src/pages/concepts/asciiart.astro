@@ -1,0 +1,51 @@
+---
+import { contact, stories } from '../../data/site';
+const picks = stories.slice(0, 4);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" /><title>Concept: ASCII</title>
+  </head>
+  <body>
+    <main>
+      <pre class="hero" aria-label="SHIP">
+ ███████╗██╗  ██╗██╗██████╗
+ ██╔════╝██║  ██║██║██╔══██╗
+ ███████╗███████║██║██████╔╝
+ ╚════██║██╔══██║██║██╔═══╝
+ ███████║██║  ██║██║██║  ██╗
+ ╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝</pre>
+      <pre class="frame">
+┌──────────────────────────────────────────────────┐
+│  SEAN DENTON · ENGINEER · GEORGETOWN, TX         │
+│  systems from nothing → production, crew of one  │
+└──────────────────────────────────────────────────┘</pre>
+      {picks.map((s, i) => (
+        <pre class="story">
+┌─[ {String(i + 1).padStart(2, '0')} ]─ {s.hook.toUpperCase().padEnd(44, '─').slice(0, 44)}┐
+{('│  ' + s.story).match(/.{1,60}/g)?.map((l) => l.padEnd(63) ).join('\n') ?? ''}
+└{'─'.repeat(50)}┘</pre>
+      ))}
+      <pre class="mail">
+   ╔════════════════════════════════════════════╗
+   ║  <a href={`mailto:${contact.email}`}>{contact.email}</a>            ║
+   ╚════════════════════════════════════════════╝</pre>
+      <p class="foot">100% hand-set characters · no images were harmed · 20+ yrs</p>
+    </main>
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #f5f5f0; color: #16160f; font-family: ui-monospace, 'Cascadia Mono', monospace; padding: 3.5rem 1rem 4rem; }
+  main { max-width: 56rem; margin: 0 auto; }
+  pre { font-family: inherit; overflow-x: auto; }
+  .hero { color: #e0311a; font-size: clamp(0.5rem, 1.9vw, 1.05rem); line-height: 1.15; font-weight: 700; }
+  .frame { margin-top: 1.25rem; font-size: 0.85rem; line-height: 1.4; }
+  .story { margin-top: 1.5rem; font-size: 0.8rem; line-height: 1.5; color: #3c3c30; }
+  .mail { margin-top: 2rem; font-size: 0.85rem; line-height: 1.4; }
+  .mail a { color: #e0311a; font-weight: 700; }
+  .foot { margin-top: 2rem; font-size: 0.68rem; letter-spacing: 0.2em; color: #8a8a7a; text-transform: uppercase; }
+</style>

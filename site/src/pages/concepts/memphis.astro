@@ -1,0 +1,68 @@
+---
+import { contact, stories } from '../../data/site';
+import '@fontsource-variable/bricolage-grotesque';
+const picks = stories.slice(0, 4);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" /><title>Concept: Memphis</title>
+  </head>
+  <body>
+    <main>
+      <span class="deco squig" aria-hidden="true">〰〰〰</span>
+      <span class="deco zig" aria-hidden="true"></span>
+      <span class="deco ball" aria-hidden="true"></span>
+      <span class="deco donut" aria-hidden="true"></span>
+      <span class="deco confetti c1" aria-hidden="true"></span>
+      <span class="deco confetti c2" aria-hidden="true"></span>
+      <header class="head"><b>SEAN DENTON</b><span>ENGINEER SINCE THE LANDLINE ERA</span></header>
+      <h1><span class="w1">SHIPS</span> <span class="w2">HAPPEN</span><span class="w3">.</span></h1>
+      <p class="sub">Rockets, drive-thrus, hospitals, tractors — one engineer, twenty-plus years, zero boring projects.</p>
+      <a class="cta" href={`mailto:${contact.email}`}>SAY HI → {contact.email}</a>
+      <section class="cards">
+        {picks.map((s, i) => (
+          <article class={`card k${i % 4}`}>
+            <span class="tape" aria-hidden="true"></span>
+            <h2>{s.hook}</h2>
+            <p>{s.story}</p>
+          </article>
+        ))}
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #fdf6ee; color: #22222a; font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; padding: 3.5rem 1.5rem; overflow-x: hidden; }
+  main { position: relative; max-width: 62rem; margin: 0 auto; }
+  .deco { position: absolute; z-index: 0; }
+  .squig { top: -1.5rem; right: 8%; font-size: 2.5rem; color: #ff4fa3; transform: rotate(-12deg); letter-spacing: -0.4em; }
+  .zig { top: 7rem; right: -1rem; width: 8rem; height: 2.4rem; background: repeating-linear-gradient(115deg, transparent 0 12px, #22c4c4 12px 16px); transform: rotate(8deg); }
+  .ball { left: -2rem; top: 14rem; width: 3.4rem; height: 3.4rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffd23f, #f2a007); }
+  .donut { right: 24%; top: 15rem; width: 3rem; height: 3rem; border-radius: 50%; border: 0.8rem solid #7a5cff; }
+  .confetti { width: 1.1rem; height: 2.4rem; }
+  .c1 { left: 34%; top: 1rem; background: #22c4c4; transform: rotate(24deg); }
+  .c2 { left: 55%; top: 4rem; background: #ff4fa3; transform: rotate(-18deg); }
+  .head { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: baseline; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  .head b { background: #22222a; color: #fdf6ee; padding: 0.3rem 0.7rem; }
+  .head span { color: #8a8794; }
+  h1 { position: relative; z-index: 1; margin-top: 2rem; font-weight: 800; font-size: clamp(3rem, 11vw, 8rem); line-height: 0.92; letter-spacing: -0.03em; text-transform: uppercase; }
+  .w1 { color: #7a5cff; text-shadow: 5px 5px 0 #ffd23f; }
+  .w2 { color: #22222a; text-shadow: 5px 5px 0 #ff4fa3; }
+  .w3 { color: #22c4c4; }
+  .sub { position: relative; z-index: 1; margin-top: 1.5rem; max-width: 30rem; font-size: 1.05rem; line-height: 1.65; font-weight: 500; }
+  .cta { position: relative; z-index: 1; display: inline-block; margin-top: 1.5rem; background: #ff4fa3; color: #fdf6ee; font-weight: 800; padding: 0.8rem 1.2rem; border-radius: 2rem 0.4rem 2rem 0.4rem; text-decoration: none; box-shadow: 5px 5px 0 #22222a; }
+  .cta:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #22222a; }
+  .cards { position: relative; z-index: 1; margin-top: 3.5rem; display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+  .card { position: relative; background: #fff; border: 3px solid #22222a; padding: 1.5rem 1.4rem 1.4rem; box-shadow: 8px 8px 0 var(--sh); }
+  .k0 { --sh: #ffd23f; transform: rotate(-1deg); border-radius: 1.5rem 0.3rem 1.5rem 0.3rem; }
+  .k1 { --sh: #22c4c4; transform: rotate(1.2deg); border-radius: 0.3rem 1.5rem 0.3rem 1.5rem; }
+  .k2 { --sh: #ff4fa3; transform: rotate(-0.6deg); border-radius: 1.5rem 0.3rem 1.5rem 0.3rem; }
+  .k3 { --sh: #7a5cff; transform: rotate(0.8deg); border-radius: 0.3rem 1.5rem 0.3rem 1.5rem; }
+  .tape { position: absolute; top: -0.8rem; left: 1.4rem; width: 4rem; height: 1.4rem; background: repeating-linear-gradient(45deg, #ffd23f 0 8px, #f2a007 8px 16px); transform: rotate(-4deg); }
+  h2 { font-weight: 800; font-size: 1.1rem; text-transform: uppercase; }
+  .card p { margin-top: 0.55rem; font-size: 0.85rem; line-height: 1.6; color: #55525e; }
+</style>
