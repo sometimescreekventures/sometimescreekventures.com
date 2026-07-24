@@ -17,6 +17,14 @@
   --color-river: #14606f;
   --color-river-deep: #0d4551;
 
+  /* Night register — the dark hero/footer bands. */
+  --color-night: #131512;
+  --color-night-soft: #1c1f1b;
+  --color-contour: #363b35;
+  --color-mist: #a9aca3;
+  --color-glow: #4fd8c2;
+  --color-glow-soft: #7ce4d3;
+
   --font-display:
     'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
   --font-sans:
@@ -46,6 +54,26 @@ html {
   outline: 2px solid var(--color-river);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* On dark bands the river outline is invisible; use the glow accent. */
+.on-night :focus-visible {
+  outline-color: var(--color-glow);
+}
+
+/* Card hover lift — disabled under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .lift {
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -16px rgb(20 96 111 / 0.35);
+  }
 }
 
 /* The signature creek line draws itself in once, on load only. */

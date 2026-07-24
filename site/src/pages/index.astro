@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import CreekLine from '../components/CreekLine.astro';
+import TopoField from '../components/TopoField.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { clients, contact, engagements, person, site } from '../data/site';
 
@@ -28,29 +29,32 @@ const leads: Record<string, { value: string; label: string }> = {
   description={site.description}
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="mx-auto max-w-5xl px-5 pt-20 pb-14 sm:px-8 sm:pt-28 sm:pb-20">
-      <p class="text-sm font-medium tracking-widest text-river uppercase">
+  <section class="on-night relative overflow-hidden bg-night text-bone">
+    <TopoField class="pointer-events-none absolute inset-0 h-full w-full" />
+    <div
+      class="relative mx-auto max-w-5xl px-5 pt-20 pb-32 sm:px-8 sm:pt-28 sm:pb-40"
+    >
+      <p class="text-sm font-medium tracking-widest text-glow uppercase">
         {person.name}
       </p>
       <h1
-        class="mt-3 max-w-3xl font-display text-4xl leading-tight font-semibold tracking-tight sm:text-5xl"
+        class="mt-4 max-w-3xl font-display text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl md:text-7xl"
       >
-        {person.title}
+        Cloud&nbsp;&amp;&nbsp;AI <span class="text-glow">Solutions</span> Architect
       </h1>
-      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-flint">
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-mist">
         {person.thesis}
       </p>
-      <div class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+      <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
         <a
           href={`mailto:${contact.email}`}
-          class="inline-block rounded-md bg-river px-5 py-2.5 text-sm font-medium text-bone hover:bg-river-deep"
+          class="inline-block rounded-md bg-glow px-5 py-2.5 text-sm font-semibold text-night hover:bg-glow-soft"
         >
           {contact.email}
         </a>
         <a
           href="/work"
-          class="text-sm font-medium text-river underline underline-offset-4 hover:text-river-deep"
+          class="text-sm font-medium text-glow underline underline-offset-4 hover:text-glow-soft"
         >
           See the work <span aria-hidden="true">→</span>
         </a>
@@ -59,7 +63,7 @@ const leads: Record<string, { value: string; label: string }> = {
     <CreekLine
       variant="hero"
       animate
-      class="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full sm:h-32"
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-28 w-full sm:h-36"
     />
   </section>
 

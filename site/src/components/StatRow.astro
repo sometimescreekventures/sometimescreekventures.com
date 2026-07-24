@@ -11,7 +11,7 @@ const { stats, class: className = '' } = Astro.props;
   {
     stats.map((stat) => (
       <div class="border-l-2 border-river pl-4">
-        <dd class="font-display text-2xl font-semibold tracking-tight tabular-nums">
+        <dd class="font-display text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl">
           {stat.value}
         </dd>
         <dt class="mt-1 text-sm leading-snug text-flint">{stat.label}</dt>

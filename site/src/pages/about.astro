@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import CreekLine from '../components/CreekLine.astro';
 import { contact, person } from '../data/site';
 ---
@@ -8,12 +9,9 @@ import { contact, person } from '../data/site';
   title="About — Sean Denton | Sometimes Creek Ventures"
   description="Sean Denton: 15+ years designing and building scalable cloud architectures. Founder of Sometimes Creek Ventures LLC, Georgetown, TX."
 >
-  <div class="mx-auto max-w-5xl px-5 pt-16 sm:px-8 sm:pt-20">
-    <h1 class="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-      About
-    </h1>
-
-    <div class="mt-10 grid gap-10 md:grid-cols-[16rem_1fr] md:gap-14">
+  <PageHero eyebrow={person.name} title="About" />
+  <div class="mx-auto max-w-5xl px-5 pt-12 sm:px-8">
+    <div class="grid gap-10 md:grid-cols-[16rem_1fr] md:gap-14">
       <div>
         <!-- TODO(sean): replace placeholder with a real photo (square-ish, ~640px). -->
         <div
