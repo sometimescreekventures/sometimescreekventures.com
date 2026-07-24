@@ -12,6 +12,13 @@ import * as path from 'path';
 const DOMAIN = 'sometimescreekventures.com';
 const WWW = `www.${DOMAIN}`;
 const GITHUB_REPO = 'sometimescreekventures/sometimescreekventures.com';
+// GitHub also issues OIDC tokens with immutable owner/repo IDs embedded in the
+// sub claim (see the repo's actions/oidc/customization/sub endpoint). Trust
+// both forms so deploys keep working whichever format GitHub sends — the
+// ID-stamped one is the stronger match (a renamed or recreated repo with the
+// same name cannot inherit it).
+const GITHUB_REPO_IMMUTABLE =
+  'sometimescreekventures@132377848/sometimescreekventures.com@1311236429';
 
 export class ScvSiteStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -201,7 +208,10 @@ export class ScvSiteStack extends cdk.Stack {
         {
           StringEquals: {
             'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-            'token.actions.githubusercontent.com:sub': `repo:${GITHUB_REPO}:ref:refs/heads/main`,
+            'token.actions.githubusercontent.com:sub': [
+              `repo:${GITHUB_REPO}:ref:refs/heads/main`,
+              `repo:${GITHUB_REPO_IMMUTABLE}:ref:refs/heads/main`,
+            ],
           },
         },
       ),

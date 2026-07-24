@@ -90,8 +90,10 @@ describe('ScvSiteStack', () => {
             Condition: {
               StringEquals: {
                 'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-                'token.actions.githubusercontent.com:sub':
+                'token.actions.githubusercontent.com:sub': [
                   'repo:sometimescreekventures/sometimescreekventures.com:ref:refs/heads/main',
+                  'repo:sometimescreekventures@132377848/sometimescreekventures.com@1311236429:ref:refs/heads/main',
+                ],
               },
             },
           }),
